@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GoodWay:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="JavaServerFaces.war">
+      <element id="artifact" artifact-name="GoodWay:war exploded" />
+    </root>
+  </artifact>
+</component>

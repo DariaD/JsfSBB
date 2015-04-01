@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - sbbdatabase@localhost" uuid="2401ec3c-4a65-4152-a3c6-5960313a32e9">
+    <database-info product="MySQL" version="5.6.23-log" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.34 ( Revision: jess.balint@oracle.com-20141014163213-wqbwpf1ok2kvo1om )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="lower" quoted-identifiers="lower"/>
+    <schema name="" catalog="sbbdatabase"/>
+    <table name="schedule" schema="" catalog="sbbdatabase" type="TABLE">
+      <column name="idSchedule" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="idTrain" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idStationFrom" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idStationTo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="DateFrom" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="avPlaces" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="DateTo" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <primary-key name="PRIMARY" columns="idSchedule"/>
+      <foreign-key name="from_schedule" columns="idStationFrom" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="to_schedule" columns="idStationTo" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="train_Shadule" columns="idTrain" ref-table="train" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idTrain" update-rule="3" delete-rule="3" deferrability="2"/>
+      <exported-key name="ticket_train" table="ticket" schema="" catalog="sbbdatabase" columns="IdSchedule"/>
+      <index name="from_idx" unique="false" columns="idStationFrom"/>
+      <index name="to_idx" unique="false" columns="idStationTo"/>
+      <index name="train_idx" unique="false" columns="idTrain"/>
+    </table>
+    <table name="station" schema="" catalog="sbbdatabase" type="TABLE">
+      <column name="idStation" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="100" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="idStation"/>
+      <exported-key name="from_schedule" table="schedule" schema="" catalog="sbbdatabase" columns="idStationFrom"/>
+      <exported-key name="to_schedule" table="schedule" schema="" catalog="sbbdatabase" columns="idStationTo"/>
+    </table>
+    <table name="testtable" schema="" catalog="sbbdatabase" type="TABLE">
+      <column name="idtestTable" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Age" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idtestTable"/>
+      <index name="idtestTable_UNIQUE" unique="true" columns="idtestTable"/>
+    </table>
+    <table name="ticket" schema="" catalog="sbbdatabase" type="TABLE">
+      <column name="idTicket" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="IdSchedule" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idTicket"/>
+      <foreign-key name="ticket_train" columns="IdSchedule" ref-table="schedule" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idSchedule" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ticket_user" columns="IdUser" ref-table="user" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
+      <index name="ticket_train_idx" unique="false" columns="IdSchedule"/>
+      <index name="ticket_user_idx" unique="false" columns="IdUser"/>
+    </table>
+    <table name="train" schema="" catalog="sbbdatabase" type="TABLE">
+      <column name="idTrain" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="plases" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="idTrain"/>
+      <exported-key name="train_Shadule" table="schedule" schema="" catalog="sbbdatabase" columns="idTrain"/>
+    </table>
+    <table name="user" schema="" catalog="sbbdatabase" type="TABLE">
+      <column name="idUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="Login" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="Password" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="FirstName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="SecondName" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
+      <column name="DateOfBirth" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="idUser"/>
+      <exported-key name="ticket_user" table="ticket" schema="" catalog="sbbdatabase" columns="IdUser"/>
+      <index name="Login_UNIQUE" unique="true" columns="Login"/>
+      <index name="Password_UNIQUE" unique="true" columns="Password"/>
+    </table>
+  </data-source>
+</component>
