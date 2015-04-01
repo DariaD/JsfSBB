@@ -21,4 +21,15 @@
             <to-view-id>/unknown.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/components/menu.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>noaccess</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>accessOk</from-outcome>
+            <to-view-id>/buyTicket.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
 </faces-config>

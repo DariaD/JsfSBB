@@ -1,6 +1,7 @@
 package com.ejb;
 
 import com.jpa.entities.User;
+import org.apache.log4j.Logger;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -16,6 +17,9 @@ import java.util.List;
 
 @Stateless
 public class UserEJB {
+
+    private static final Logger log = Logger.getLogger(UserEJB.class.getName());
+
     @PersistenceContext(unitName = "SBB_PU")
     private EntityManager entityManager;
 
@@ -39,19 +43,21 @@ public class UserEJB {
 
     public boolean login(String login, String password) {
         try {
+            log.info("Start check user with login: " + login);
             TypedQuery<User> query = entityManager.createNamedQuery("User.findByLoginAndPassword", User.class);
             query.setParameter("login", login);
             query.setParameter("password", password);
             List<User> list = query.getResultList();
             if (!list.isEmpty()){
-                System.out.println(list.get(0).getLogin());
+                User user = list.get(0);
+                log.info(String.format("Find such user: real name - %s %s", user.getFirstName(), user.getSecondName()));
                 return true;
             } else {
-                System.out.println("List is empty");
+                log.info("Not find such user in database");
                 return false;
             }
         } catch (Exception ex) {
-            System.out.println("Error in login() -->" + ex.getMessage());
+            log.info(String.format("Error in login() -->" + ex.getMessage()));
             return false;
         }
     }

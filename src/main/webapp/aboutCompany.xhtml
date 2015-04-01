@@ -15,20 +15,12 @@
 <h:body>
     <h2>Welcome to GoodWay! You will have a nice trip! :) </h2>
 
-    <h3> Please login to continue: </h3>
+    <h3> This page is about GoodWay Company</h3>
 
 
-    <h:form>
-        <h:panelGrid columns="2" cellpadding="5">
-
-            <h:outputLabel for="name" value="Login:" style="font-weight:bold" />
-            <p:inputText id="name" value="#{basicView.text}" />
-            <h:outputText value="Password: " style="font-weight:bold"/>
-            <p:password id="Password" value="#{basicView.password}" />
-            <p:commandButton value="Login" action="#{basicView.login}" icon="ui-icon-check" />
-        </h:panelGrid>
-
-    </h:form>
+    <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
+        <p:graphicImage name="images/#{image}" alt="Image Description for #{image}" title="#{image}"/>
+    </p:galleria>
 
 </h:body>
 </html>

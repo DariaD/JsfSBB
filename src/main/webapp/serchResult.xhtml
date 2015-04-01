@@ -5,16 +5,18 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
         >
 
 <h:head>
-    <title>BuyTicket</title>
+    <title>GoodWay</title>
     <ui:include src="/components/menu.xhtml" />
 </h:head>
 <h:body>
-    <h3>Welcome to GoodWay! You will have a nice trip! :) </h3>
-    <h3>Here you can buy ticket</h3>
+    <h2>You try to find trains from: "#{searchController.selectedStationFrom}" to "#{searchController.selectedStationTo}"  </h2>
+    <h2>Date: "#{searchController.date}"   </h2>
 
+    <h3> Result: </h3>
 
 </h:body>
 </html>
