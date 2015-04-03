@@ -7,29 +7,19 @@
         version="2.0">
 
     <navigation-rule>
-        <from-view-id>/index.xhtml</from-view-id>
+        <from-view-id>/index.xhtml/pages/user/index.xhtml/pages/index.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>welcomUser</from-outcome>
-            <to-view-id>/welcomUser.xhtml</to-view-id>
+            <to-view-id>/pages/user/welcomUser.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>welcomAdmin</from-outcome>
-            <to-view-id>/welcomAdmin.xhtml</to-view-id>
+            <to-view-id>/pages/admin/welcomAdmin.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>nosuchuser</from-outcome>
-            <to-view-id>/unknown.xhtml</to-view-id>
+            <to-view-id>/pages/error/unknown.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
-    <navigation-rule>
-        <from-view-id>/components/menu.xhtml</from-view-id>
-        <navigation-case>
-            <from-outcome>noaccess</from-outcome>
-            <to-view-id>/index.xhtml</to-view-id>
-        </navigation-case>
-        <navigation-case>
-            <from-outcome>accessOk</from-outcome>
-            <to-view-id>/buyTicket.xhtml</to-view-id>
-        </navigation-case>
-    </navigation-rule>
+
 </faces-config>

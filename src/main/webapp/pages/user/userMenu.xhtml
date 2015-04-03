@@ -1,0 +1,22 @@
+<ui:composition
+        xmlns="http://www.w3.org/1999/xhtml"
+        xmlns:h="http://xmlns.jcp.org/jsf/html"
+        xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+        xmlns:f="http://xmlns.jcp.org/jsf/core"
+        xmlns:p="http://primefaces.org/ui"
+        xmlns:c="http://xmlns.jcp.org/jsp/jstl/core"
+        >
+
+<h:form>
+    <p:growl id="messages"/>
+
+    <p:menubar>
+        <p:menuitem value="Home" url="/pages/user/welcomUser.xhtml" />
+        <p:menuitem value="Schedule" url="/pages/common/schedule.xhtml"/>
+        <p:menuitem value="Buy ticket" url="/pages/user/searchTrain.xhtml"/>
+        <p:menuitem value="About Company" url="/pages/common/aboutCompany.xhtml"/>
+        <p:menuitem value="Log Out" action="#{menuNavigation.logout}" />
+        </p:menubar>
+</h:form>
+
+</ui:composition>

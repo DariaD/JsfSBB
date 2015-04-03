@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+        >
+
+<h:head>
+    <title>GoodWay</title>
+    <ui:include src="/pages/common/commonMenu.xhtml" />
+</h:head>
+<h:body>
+    <h2>Welcome to GoodWay! You will have a nice trip! :) </h2>
+
+    <h3>Please full all filds</h3>
+    <h:form>
+        <p:messages id="messages" showDetail="true" autoUpdate="true" />
+
+        <h:panelGrid columns="2" cellpadding="5">
+
+            <h:outputLabel for="login" value="Login:"  />
+            <p:inputText id="login" value="#{registrationController.login}" />
+
+            <h:outputLabel for="pwd1" value="Password:" />
+            <p:password id="pwd1" value="#{registrationController.password}" match="pwd2" label="Password 1" required="true" />
+
+            <h:outputLabel for="pwd2" value="Confirm password:" />
+            <p:password id="pwd2" value="#{registrationController.password}" label="Password 2" required="true" />
+
+            <h:outputLabel for="firstName" value="First Name:"  />
+            <p:inputText id="firstName" value="#{registrationController.firstName}" />
+
+            <h:outputLabel for="secondName" value="Second Name:"  />
+            <p:inputText id="secondName" value="#{registrationController.secondName}" />
+
+            <p:outputLabel for="date" value="Date of Birth:" />
+            <p:calendar id="date" value="#{registrationController.date}" mode="inline" />
+
+
+
+
+            <p:commandButton value="Registrate" action="#{registrationController.addUser}"/>
+        </h:panelGrid>
+
+    </h:form>
+
+</h:body>
+</html>
