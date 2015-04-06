@@ -24,22 +24,27 @@ public class RegistrationController {
     private String secondName;
     private Date date;
 
-    private String errorMessage;
+    private String messages;
 
     public String addUser(){
         User user = new User();
         if(userEJB.isExist(login)){
-            errorMessage = "Such user already exist. Please enter another name.";
-            return "error/loginError.xhtml";
+            addErrorMessage("Such user already exist. Please enter another name.");
+            return "pages/error/loginError.xhtml";
 
         }
-        user.setLogin(login);
-        user.setPassword(password);
-        user.setFirstName(firstName);
-        user.setSecondName(secondName);
-        user.setDateOfBirth(date);
-        userEJB.addNew(user);
-        return "successRegistrationPage.xhtml";
+        if(login != null &&  password != null && firstName != null && secondName != null && date != null) {
+            user.setLogin(login);
+            user.setPassword(password);
+            user.setFirstName(firstName);
+            user.setSecondName(secondName);
+            user.setDateOfBirth(date);
+            userEJB.addNew(user);
+            return "successRegistrationPage.xhtml";
+        } else {
+            addErrorMessage("Such user already exist. Please enter another login.");
+            return "error/loginError.xhtml";
+        }
     }
 
     public String loginRedirect(){
@@ -48,7 +53,7 @@ public class RegistrationController {
     }
 
     public String registrationRedirect(){
-        return "common/registration.xhtml";
+        return "/pages/common/registration.xhtml";
     }
 
 
@@ -89,14 +94,25 @@ public class RegistrationController {
     }
 
     public void setDate(Date date) {
-        this.date = date;
+        Date currentDate = new Date();
+        if(currentDate.before(date)){
+            this.date = null;
+            addErrorMessage("You can't select date for birthday from future. Please enter correct date");
+        } else {
+            this.date = date;
+        }
     }
 
     public String getErrorMessage() {
-        return errorMessage;
+        return messages;
     }
 
     public void setErrorMessage(String errorMessage) {
-        this.errorMessage = errorMessage;
+        this.messages = errorMessage;
+    }
+
+    private  void addErrorMessage(String newError){
+        messages = String.format("%s /n %s", messages, newError);
+
     }
 }

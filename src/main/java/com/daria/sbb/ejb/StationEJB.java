@@ -31,4 +31,18 @@ public class StationEJB {
         entityManager.persist(station);
         return station;
     }
+
+    public boolean isExist(String newStationName) {
+        log.info("Start check station with name: " + newStationName);
+        TypedQuery<Station> query = entityManager.createNamedQuery("Station.findByName", Station.class);
+        query.setParameter("name", newStationName);
+        List<Station> list = query.getResultList();
+        if (list.isEmpty()){
+            log.info(String.format("No station with name like %s", newStationName));
+            return false;
+        } else {
+            log.info(String.format("Station with name %s exist in database", newStationName));
+            return true;
+        }
+    }
 }

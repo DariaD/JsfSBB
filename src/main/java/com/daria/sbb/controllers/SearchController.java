@@ -13,10 +13,15 @@ import java.util.*;
 @ManagedBean
 public class SearchController {
 
+    /*Parameters for search train and buy ticket*/
     private String selectedStationFrom;
     private String selectedStationTo;
     private Date date;
     private static Map<String, Station> stationMap = new TreeMap<String, Station>();
+
+    /*Parameters for search for schedule*/
+    private String selectedStationForTrain;
+    private Date dateForTrain;
 
     @EJB
     private StationEJB stationEJB;
@@ -51,7 +56,7 @@ public class SearchController {
     }
 
     public String search(){
-        return "serchResult";
+        return "searchResult";
 
     }
 
@@ -61,5 +66,21 @@ public class SearchController {
 
     public void setDate(Date date) {
         this.date = date;
+    }
+
+    public Date getDateForTrain() {
+        return dateForTrain;
+    }
+
+    public void setDateForTrain(Date dateForTrain) {
+        this.dateForTrain = dateForTrain;
+    }
+
+    public String getSelectedStationForTrain() {
+        return selectedStationForTrain;
+    }
+
+    public void setSelectedStationForTrain(String selectedStationForTrain) {
+        this.selectedStationForTrain = selectedStationForTrain;
     }
 }

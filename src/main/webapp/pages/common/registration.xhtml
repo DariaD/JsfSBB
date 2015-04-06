@@ -25,10 +25,10 @@
             <p:inputText id="login" value="#{registrationController.login}" />
 
             <h:outputLabel for="pwd1" value="Password:" />
-            <p:password id="pwd1" value="#{registrationController.password}" match="pwd2" label="Password 1" required="true" />
+            <p:password id="pwd1" value="#{registrationController.password}" match="pwd2" label="Password 1" required="true" feedback="true"/>
 
             <h:outputLabel for="pwd2" value="Confirm password:" />
-            <p:password id="pwd2" value="#{registrationController.password}" label="Password 2" required="true" />
+            <p:password id="pwd2" value="#{registrationController.password}" label="Password 2" required="true" feedback="true"/>
 
             <h:outputLabel for="firstName" value="First Name:"  />
             <p:inputText id="firstName" value="#{registrationController.firstName}" />
@@ -36,11 +36,11 @@
             <h:outputLabel for="secondName" value="Second Name:"  />
             <p:inputText id="secondName" value="#{registrationController.secondName}" />
 
-            <p:outputLabel for="date" value="Date of Birth:" />
-            <p:calendar id="date" value="#{registrationController.date}" mode="inline" />
+            <p:outputLabel for="date" value="Date of Birth in formet : yyyy-MMM-dd" />
+            <p:calendar id="date" value="#{registrationController.date}" locale="en" navigator="true" pattern="yyyy-MMM-dd" />
+            <f:validator>
 
-
-
+            </f:validator>
 
             <p:commandButton value="Registrate" action="#{registrationController.addUser}"/>
         </h:panelGrid>

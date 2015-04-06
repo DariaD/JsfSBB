@@ -1,6 +1,7 @@
 package com.daria.sbb.jpa.entities;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * Created by Дарья on 04.03.2015.
@@ -63,33 +64,61 @@ public class Station {
 //    }
 
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationFrom")
-//    private Set<Schedule> stationFrom;
-//
-//    public Set<Schedule> getScheduleFrom() {
-//        return stationFrom;
-//    }
-//
-//    public void setScheduleFrom(Set<Schedule> stopStation) {
-//        this.stationFrom = stopStation;
-//    }
-//
-//    public void addScheduleFrom(Schedule schedule) {
-//        stationFrom.add(schedule);
-//    }
-//
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTo")
-//    private Set<Schedule> stationTo;
-//
-//    public Set<Schedule> getScheduleTo() {
-//        return stationTo;
-//    }
-//
-//    public void setScheduleTo(Set<Schedule> stopStation) {
-//        this.stationTo = stopStation;
-//    }
-//
-//    public void addScheduleTo(Schedule schedule) {
-//        stationTo.add(schedule);
-//    }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationFrom")
+    private Set<Schedule> stationFrom;
+
+    public Set<Schedule> getScheduleFrom() {
+        return stationFrom;
+    }
+
+    public void setScheduleFrom(Set<Schedule> stopStation) {
+        this.stationFrom = stopStation;
+    }
+
+    public void addScheduleFrom(Schedule schedule) {
+        stationFrom.add(schedule);
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTo")
+    private Set<Schedule> stationTo;
+
+    public Set<Schedule> getScheduleTo() {
+        return stationTo;
+    }
+
+    public void setScheduleTo(Set<Schedule> stopStation) {
+        this.stationTo = stopStation;
+    }
+
+    public void addScheduleTo(Schedule schedule) {
+        stationTo.add(schedule);
+    }
+
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationOne")
+    private Set<Road> stationOne;
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTwo")
+    private Set<Road> stationTwo;
+
+    public Set<Road> getStationOne() {
+        return stationOne;
+    }
+
+    public void setStationOne(Set<Road> stationOne) {
+        this.stationOne = stationOne;
+    }
+
+    public Set<Road> getStationTwo() {
+        return stationTwo;
+    }
+
+    public void setStationTwo(Set<Road> stationTwo) {
+        this.stationTwo = stationTwo;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "station")
+    private Set<StopStation> stopStations;
 }

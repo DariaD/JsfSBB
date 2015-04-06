@@ -14,7 +14,7 @@
         </navigation-case>
         <navigation-case>
             <from-outcome>welcomAdmin</from-outcome>
-            <to-view-id>/pages/admin/welcomAdmin.xhtml</to-view-id>
+            <to-view-id>/pages/admin/welcomeAdmin.xhtml</to-view-id>
         </navigation-case>
         <navigation-case>
             <from-outcome>nosuchuser</from-outcome>

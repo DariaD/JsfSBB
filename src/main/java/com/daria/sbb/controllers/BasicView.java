@@ -31,7 +31,7 @@ public class BasicView {
               session.setAttribute("user", userFromBase);
           if(text.equals("admin") || text.equals("1")){
               session.setAttribute("role", "admin");
-              return "/pages/admin/welcomAdmin.xhtml";
+              return "/pages/admin/welcomeAdmin.xhtml";
           } else {
               session.setAttribute("role", "user");
               return "/pages/user/welcomUser.xhtml";

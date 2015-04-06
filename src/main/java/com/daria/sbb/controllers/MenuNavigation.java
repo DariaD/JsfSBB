@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
         HttpSession session = sessionUtil.getSession();
         session.setAttribute("user", null);
         session.setAttribute("role", null);
-        return "pages/index.xhtml";
+        return "index.xhtml";
     }
 
     public boolean isLogin() {
@@ -38,11 +38,11 @@ import javax.servlet.http.HttpSession;
         Object user = session.getAttribute("user");
         if( user != null ){
             if( session.getAttribute("role").equals("admin")){
-                return "pages/admin/adminMenu.xhtml";
+                return "/pages/admin/adminMenu.xhtml";
             }
-            return "pages/user/userMenu.xhtml";
+            return "/pages/user/userMenu.xhtml";
         }
-        return "pages/common/commonMenu.xhtml";
+        return "/pages/common/commonMenu.xhtml";
     }
 
     public String getSelectedMenu(){
