@@ -21,7 +21,7 @@ import javax.servlet.http.HttpSession;
         HttpSession session = sessionUtil.getSession();
         session.setAttribute("user", null);
         session.setAttribute("role", null);
-        return "index.xhtml";
+        return "index";
     }
 
     public boolean isLogin() {

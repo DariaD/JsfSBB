@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+        >
+
+<h:head>
+    <title>GoodWay</title>
+    <ui:include src="/pages/admin/adminMenu.xhtml" />
+</h:head>
+<h:body>
+    <h2>Welcome Administrator! :) </h2>
+
+    <h:form>
+        <p:messages id="messages" showDetail="true" autoUpdate="true" />
+        <h:panelGrid columns="2" cellpadding="5">
+
+            <p:outputLabel for="from" value="Route Station One:" />
+            <p:selectOneMenu  id="from" value="#{adminManageController.stationOne}" converter="stationConverter"  >
+                <f:selectItems value="#{adminManageController.stationMap}"/>
+            </p:selectOneMenu >
+
+            <p:outputLabel for="to" value="Route Station Two:" />
+            <p:selectOneMenu  id="to" value="#{adminManageController.stationTwo}" converter="stationConverter" >
+                <f:selectItems value="#{adminManageController.stationMap}"/>
+            </p:selectOneMenu >
+            <h:outputLabel for="distance" value="Distance:"  />
+            <p:inputText id="distance" value="#{adminManageController.distance}" >
+                <f:validator validatorId="DistanceValidator" />
+            </p:inputText>
+            <p:commandButton value="Add Route" action="#{adminManageController.addNewRoute}"/>
+        </h:panelGrid>
+
+    </h:form>
+
+    <h:form>
+        <p:dataTable id="tbl" var="route" value="#{adminManageController.routesList}"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                     paginator="true" rows="10" style="margin-bottom:20px">
+
+            <f:facet name="Existing Stations">
+
+                <h:commandLink>
+                    <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+                    <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+                </h:commandLink>
+
+            </f:facet>
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Id" />
+                </f:facet>
+                <h:outputText value="#{adminManageController.idRoute}" />
+            </p:column>
+
+                      <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Station  -  Station"/>
+                </f:facet>
+                <h:outputText value="#{route.name}" />
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Distance"/>
+                </f:facet>
+                <h:outputText value="#{route.distance}" />
+            </p:column>
+
+        </p:dataTable>
+    </h:form>
+
+</h:body>
+</html>

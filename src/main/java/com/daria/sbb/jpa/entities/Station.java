@@ -18,7 +18,7 @@ import java.util.Set;
         @NamedQuery(name="Station.findByName", query="SELECT c FROM Station c WHERE c.name = :name") })
 public class Station {
         @Id
-        @GeneratedValue(strategy = GenerationType.AUTO)
+        @GeneratedValue(strategy = GenerationType.IDENTITY)
         private long idStation;
 
         @Column(name = "Name", length = 100)
@@ -49,6 +49,23 @@ public class Station {
                     ", name='" + name +
                     '}';
         }
+
+        @Override
+         public boolean equals(Object obj) {
+            if (this == obj)
+                return true;
+            if (obj == null)
+                return false;
+            if (!(obj instanceof Station))//changed this from (getClass() != obj.getClass())
+                return false;
+            Station other = (Station) obj;
+            if(this.getId() == other.getId() && this.name.equals(other.getName())){
+                return true;
+            }
+            return false;
+        }
+
+
 
 
 //    @ManyToMany
@@ -97,26 +114,36 @@ public class Station {
 
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationOne")
-    private Set<Road> stationOne;
+    private Set<Route> stationOne;
 
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTwo")
-    private Set<Road> stationTwo;
+    private Set<Route> stationTwo;
 
-    public Set<Road> getStationOne() {
+    public Set<Route> getStationOne() {
         return stationOne;
     }
 
-    public void setStationOne(Set<Road> stationOne) {
+    public void setStationOne(Set<Route> stationOne) {
         this.stationOne = stationOne;
     }
 
-    public Set<Road> getStationTwo() {
+
+
+    public Set<Route> getStationTwo() {
         return stationTwo;
     }
 
-    public void setStationTwo(Set<Road> stationTwo) {
+    public void setStationTwo(Set<Route> stationTwo) {
         this.stationTwo = stationTwo;
+    }
+
+    public void addStationOne(Route route) {
+        stationOne.add(route);
+    }
+
+    public void addStationTwo(Route route) {
+        stationTwo.add(route);
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "station")

@@ -45,4 +45,18 @@ public class StationEJB {
             return true;
         }
     }
+
+    public Station findByName(Station newStationName) {
+        log.info("Start check station with name: " + newStationName);
+        TypedQuery<Station> query = entityManager.createNamedQuery("Station.findByName", Station.class);
+        query.setParameter("name", newStationName);
+        List<Station> list = query.getResultList();
+        if (!list.isEmpty()){
+            log.info(String.format("Station with name like %s found", newStationName));
+            return list.get(0);
+        } else {
+            log.info(String.format("No station with name like %s", newStationName));
+            return null;
+        }
+    }
 }

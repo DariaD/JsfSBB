@@ -11,8 +11,14 @@
 
     <p:menubar>
         <p:menuitem value="Schedule" url="/pages/common/schedule.xhtml"/>
-        <p:menuitem value="Buy ticket" url="/pages/user/searchTrain.xhtml"/>
-        <p:menuitem value="Manage " url="/pages/common/schedule.xhtml"/>
+        <p:submenu label="Manage" icon="ui-icon-gear">
+            <p:menuitem value="Stations" url="/pages/admin/manage/Stations.xhtml" />
+            <p:menuitem value="Routes" url="/pages/admin/manage/Routes.xhtml" />
+            <p:menuitem value="Trains" url="/pages/admin/manage/Trains.xhtml" />
+            <p:menuitem value="Departures" url="/pages/admin/manage/Departures.xhtml" />
+            <p:menuitem value="Common" url="/pages/admin/manage/Common.xhtml" />
+        </p:submenu>
+
         <p:menuitem value="About Company" url="/pages/common/aboutCompany.xhtml"/>
         <p:menuitem value="Log out" action="#{menuNavigation.logout}"  />
     </p:menubar>

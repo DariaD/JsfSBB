@@ -8,9 +8,14 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "roads")
-public class Road {
+@NamedQueries({
+        @NamedQuery(name = "Route.getAll", query = "SELECT c from Route c"),
+        @NamedQuery(name = "Route.findByNames",
+                query="SELECT c FROM Route c WHERE c.stationOne = :stationOne and c.stationTwo = :stationTwo") })
+
+public class Route {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idRoads;
 
     @Column(name = "distance")

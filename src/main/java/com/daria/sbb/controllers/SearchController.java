@@ -17,7 +17,7 @@ public class SearchController {
     private String selectedStationFrom;
     private String selectedStationTo;
     private Date date;
-    private static Map<String, Station> stationMap = new TreeMap<String, Station>();
+    private Map<String, Station> stationMap = new TreeMap<String, Station>();
 
     /*Parameters for search for schedule*/
     private String selectedStationForTrain;

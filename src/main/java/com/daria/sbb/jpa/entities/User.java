@@ -9,7 +9,7 @@ import java.util.Date;
 @Entity
 @Table(name = "User")
 @NamedQueries({
-        @NamedQuery(name = "User.getAll", query = "SELECT c from User  c"),
+        @NamedQuery(name = "User.getAll", query = "SELECT c FROM User  c"),
         @NamedQuery(name="User.findByName", query="SELECT c FROM User c WHERE c.login = :login"),
         @NamedQuery(name="User.findByLoginAndPassword", query="SELECT c FROM User c WHERE c.login = :login AND c.password = :password")
 })

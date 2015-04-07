@@ -9,7 +9,7 @@
         >
 <h:head>
     <title>GoodWay</title>
-    <ui:include src="/pages/common/commonMenu.xhtml" />
+    <ui:include src="#{menuNavigation.selectedMenu}"  />
 </h:head>
 <h:body>
     <h2>Welcome to GoodWay! You will have a nice trip! :) </h2>
@@ -19,7 +19,7 @@
         <h:panelGrid columns="2" cellpadding="5">
 
             <p:outputLabel for="from" value="Station from:" />
-            <p:selectOneMenu  id="from" value="#{searchController.selectedStationForTrain}"  >
+            <p:selectOneMenu  id="from" value="#{searchController.selectedStationForTrain}" converter="stationConverter"  >
                 <f:selectItems value="#{searchController.stationMap}"/>
             </p:selectOneMenu >
 
