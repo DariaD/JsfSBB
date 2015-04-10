@@ -56,4 +56,6 @@ public class Route {
     public void setStationOne(Station stationOne) {
         this.stationOne = stationOne;
     }
+
+
 }

@@ -9,6 +9,12 @@ import java.util.Date;
 
 @Entity
 @Table(name = "stopstation")
+
+@NamedQueries({
+        @NamedQuery(name = "StopStation.getAll", query = "SELECT c from StopStation c"),
+        @NamedQuery(name = "StopStation.findByStation", query = "SELECT c FROM StopStation c WHERE c.station = :station"),
+        @NamedQuery(name = "StopStation.getByDateAndName", query = "SELECT c FROM StopStation c WHERE c.station = :station AND c.date = :date")
+})
 public class StopStation {
 
     @Id
@@ -17,6 +23,11 @@ public class StopStation {
 
     @Column(name = "Date")
     private Date date;
+
+
+
+    @Column(name = "CurrPlaceAvalable")
+    private int currPlaceAvalable;
 
     /*One station can be in several schedules*/
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -49,5 +60,21 @@ public class StopStation {
 
     public void setTrainDeparture(TrainDeparture trainDeparture) {
         this.trainDeparture = trainDeparture;
+    }
+
+    public int getCurrPlaceAvalable() {
+        return currPlaceAvalable;
+    }
+
+    public void setCurrPlaceAvalable(int currPlaceAvalable) {
+        this.currPlaceAvalable = currPlaceAvalable;
+    }
+
+    public long getIdStopStation() {
+        return idStopStation;
+    }
+
+    public void setIdStopStation(long idStopStation) {
+        this.idStopStation = idStopStation;
     }
 }

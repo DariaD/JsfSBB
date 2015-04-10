@@ -19,14 +19,14 @@
         <h:panelGrid columns="2" cellpadding="5">
 
             <p:outputLabel for="from" value="Station from:" />
-            <p:selectOneMenu  id="from" value="#{searchController.selectedStationForTrain}" converter="stationConverter"  >
+            <p:selectOneMenu  id="from" value="#{scheduleController.selectedStation}" converter="stationConverter"  >
                 <f:selectItems value="#{searchController.stationMap}"/>
             </p:selectOneMenu >
 
             <p:outputLabel for="date" value="Date:" />
-            <p:calendar id="date" value="#{searchController.dateForTrain}" mode="inline" />
+            <p:calendar id="date" value="#{scheduleController.date}" mode="inline" />
 
-            <p:commandButton value="Search" action="#{searchController.searchTrains}" icon="ui-icon-search" />
+            <p:commandButton value="Search" action="#{scheduleController.searchTrains}" icon="ui-icon-search" />
 
 
         </h:panelGrid>

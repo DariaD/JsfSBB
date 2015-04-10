@@ -44,6 +44,8 @@
       <exported-key name="from_schedule" table="schedule" schema="" catalog="sbbdatabase" columns="idStationFrom"/>
       <exported-key name="to_schedule" table="schedule" schema="" catalog="sbbdatabase" columns="idStationTo"/>
       <exported-key name="ss2" table="stopstation" schema="" catalog="sbbdatabase" columns="idStation"/>
+      <exported-key name="keykey" table="traindeparture" schema="" catalog="sbbdatabase" columns="idDepStationFrom"/>
+      <exported-key name="keykey2" table="traindeparture" schema="" catalog="sbbdatabase" columns="idDepStationTo"/>
     </table>
     <table name="stopstation" schema="" catalog="sbbdatabase" type="TABLE">
       <column name="idStopStation" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
@@ -77,7 +79,7 @@
     <table name="train" schema="" catalog="sbbdatabase" type="TABLE">
       <column name="idTrain" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="Name" sqlType="VARCHAR" precision="45" scale="0" nullable="false" jdbcType="12"/>
-      <column name="plases" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="places" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="idTrainType" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="idTrain"/>
       <foreign-key name="tt" columns="idTrainType" ref-table="traintype" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idtrainType" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -89,10 +91,16 @@
       <column name="idTrainDeparture" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
       <column name="idTrain" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="DepartureTime" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
+      <column name="idDepStationFrom" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="idDepStationTo" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="idTrainDeparture"/>
       <foreign-key name="departureKey" columns="idTrain" ref-table="train" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idTrain" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="keykey" columns="idDepStationFrom" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="keykey2" columns="idDepStationTo" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="ss1" table="stopstation" schema="" catalog="sbbdatabase" columns="IdDepartureTrain"/>
       <index name="departureKey_idx" unique="false" columns="idTrain"/>
+      <index name="fromKey_idx" unique="false" columns="idDepStationFrom"/>
+      <index name="keykey2_idx" unique="false" columns="idDepStationTo"/>
     </table>
     <table name="traintype" schema="" catalog="sbbdatabase" type="TABLE">
       <column name="idtrainType" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>

@@ -18,11 +18,11 @@ import java.util.Set;
 
 @Entity
 @Table(name = "schedule")
-@NamedQuery(name = "StopStation.getAll", query = "SELECT c from Schedule  c")
+@NamedQuery(name = "Schedule.getAll", query = "SELECT c from Schedule  c")
 public class Schedule {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idSchedule;
 
     @Column(name = "DateFrom")
@@ -59,10 +59,10 @@ public class Schedule {
     }
 
     public void setAvPlaces(int avPlaces) {
-        if(avPlaces <= this.train.getPlases()) {
+        if(avPlaces <= this.train.getPlaces()) {
             this.avPlaces = avPlaces;
         } else {
-            System.err.println("Train has only " + this.train.getPlases() + " places.");
+            System.err.println("Train has only " + this.train.getPlaces() + " places.");
             System.err.println("Number of free places can't be more then number of all places in the train.");
         }
     }

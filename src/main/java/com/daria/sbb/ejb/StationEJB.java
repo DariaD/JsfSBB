@@ -28,7 +28,7 @@ public class StationEJB {
 
 
     public Station addNew(Station station) {
-        entityManager.persist(station);
+        entityManager.merge(station);
         return station;
     }
 

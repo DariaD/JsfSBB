@@ -16,10 +16,34 @@
     <h2>Welcome Administrator! :) </h2>
 
     <h:form>
+
+        <h3> Add new daparture</h3>
+
         <p:messages id="messages" showDetail="true" autoUpdate="true" />
         <h:panelGrid columns="2" cellpadding="5">
+            <p:outputLabel for="from" value="Station from:" />
+            <p:selectOneMenu  id="from" value="#{departureController.selectedStationFrom}" converter="stationConverter"  >
+                <f:selectItems value="#{searchController.stationMap}"/>
+            </p:selectOneMenu >
 
+            <p:outputLabel for="to" value="Station to:" />
+            <p:selectOneMenu  id="to" value="#{departureController.selectedStationTo}" converter="stationConverter"  >
+                <f:selectItems value="#{searchController.stationMap}"/>
+            </p:selectOneMenu >
+
+            <p:outputLabel for="train" value="Train:" />
+            <p:selectOneMenu  id="train" value="#{departureController.train}" converter="trainConverter"  >
+                <f:selectItems value="#{departureController.trainMap}"/>
+            </p:selectOneMenu >
+
+            <p:outputLabel for="datetime" value="Date and Time:" />
+            <p:calendar id="datetime" value="#{departureController.date}" pattern="MM/dd/yyyy HH:mm:ss" />
+
+            <p:commandButton value="Add departure" action="#{departureController.addDeparture}"  />
         </h:panelGrid>
+
+        <p:separator />
+
 
     </h:form>
 </h:body>

@@ -1,6 +1,9 @@
 package com.daria.sbb.jpa.entities;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -15,7 +18,7 @@ import java.util.Set;
        @Table(name = "station")
 @NamedQueries({
         @NamedQuery(name = "Station.getAll", query = "SELECT c from Station c"),
-        @NamedQuery(name="Station.findByName", query="SELECT c FROM Station c WHERE c.name = :name") })
+        @NamedQuery(name = "Station.findByName", query = "SELECT c FROM Station c WHERE c.name = :name") })
 public class Station {
         @Id
         @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -65,6 +68,10 @@ public class Station {
             return false;
         }
 
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 31).append(idStation).append(name).toHashCode();
+    }
 
 
 
@@ -120,6 +127,61 @@ public class Station {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTwo")
     private Set<Route> stationTwo;
 
+
+    public Set<Schedule> getStationFrom() {
+        return stationFrom;
+    }
+
+    public void setStationFrom(Set<Schedule> stationFrom) {
+        this.stationFrom = stationFrom;
+    }
+
+    public Set<Schedule> getStationTo() {
+        return stationTo;
+    }
+
+    public void setStationTo(Set<Schedule> stationTo) {
+        this.stationTo = stationTo;
+    }
+
+    public Set<TrainDeparture> getStationsFormList() {
+        return stationsFormList;
+    }
+
+    public void setStationsFormList(Set<TrainDeparture> stationsFormList) {
+        this.stationsFormList = stationsFormList;
+    }
+
+    public Set<TrainDeparture> getStationToList() {
+        return stationToList;
+    }
+
+    public void setStationToList(Set<TrainDeparture> stationToList) {
+        this.stationToList = stationToList;
+    }
+
+    public Set<StopStation> getStopStations() {
+        return stopStations;
+    }
+
+    public void setStopStations(Set<StopStation> stopStations) {
+        this.stopStations = stopStations;
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationFrom")
+    private Set<TrainDeparture> stationsFormList = new HashSet<TrainDeparture>();
+
+    public void addStopForm(TrainDeparture ss){
+        stationsFormList.add(ss);
+    }
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTo")
+    private Set<TrainDeparture> stationToList = new HashSet<TrainDeparture>();
+
+    public void addStopTo(TrainDeparture ss){
+        stationToList.add(ss);
+    }
+
     public Set<Route> getStationOne() {
         return stationOne;
     }
@@ -148,4 +210,8 @@ public class Station {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "station")
     private Set<StopStation> stopStations;
+
+    public void addStopStation(StopStation stopStation) {
+        stopStations.add(stopStation);
+    }
 }

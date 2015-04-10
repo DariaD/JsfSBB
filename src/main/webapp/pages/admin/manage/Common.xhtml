@@ -16,11 +16,75 @@
     <h2>Welcome Administrator! :) </h2>
 
     <h:form>
+
+        <h3> Add new types of train </h3>
+
         <p:messages id="messages" showDetail="true" autoUpdate="true" />
         <h:panelGrid columns="2" cellpadding="5">
 
+            <h:outputLabel for="trainType" value="New train type:"  />
+            <p:inputText id="trainType" value="#{commonController.name}">
+            </p:inputText>
+
+            <h:outputLabel for="speed" value="Train's speed:"  />
+            <p:inputText id="speed" value="#{commonController.speed}" >
+                <f:validator validatorId="NumberValidator" />
+            </p:inputText>
+
+            <h:outputLabel for="cost" value="Cost for km:"  />
+            <p:inputText id="cost" value="#{commonController.cost}" >
+                <f:validator validatorId="NumberValidator" />
+            </p:inputText>
+
+            <p:commandButton value="Add New Train Type" update="tbl" action="#{commonController.addTrainType}"/>
         </h:panelGrid>
 
+        <p:separator />
+
+        <h3> Existing types of train </h3>
+
+        <p:dataTable id="tbl" var="trainType" value="#{commonController.trainTypeList}"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                     paginator="true" rows="10" style="margin-bottom:20px">
+
+            <f:facet name="Existing Stations">
+
+                <h:commandLink>
+                    <p:graphicImage name="/demo/images/pdf.png" width="24"/>
+                    <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
+                </h:commandLink>
+
+            </f:facet>
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Id" />
+                </f:facet>
+                <h:outputText value="#{commonController.idTrainType}" />
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Train Type Name"/>
+                </f:facet>
+                <h:outputText value="#{trainType.type}" />
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Speed"/>
+                </f:facet>
+                <h:outputText value="#{trainType.speed}" />
+            </p:column>
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Cost for km"/>
+                </f:facet>
+                <h:outputText value="#{trainType.costforkm}" />
+            </p:column>
+
+        </p:dataTable>
     </h:form>
 </h:body>
 </html>

@@ -9,10 +9,14 @@ import java.util.Set;
 
 @Entity
 @Table(name = "traintype")
+@NamedQueries({
+        @NamedQuery(name = "TrainType.getAll", query = "SELECT c from TrainType  c"),
+        @NamedQuery(name="TrainType.findByName", query="SELECT c FROM TrainType c WHERE c.type = :type")
+})
 public class TrainType {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idTrainType;
 
     @Column(name = "type", length = 45)
@@ -22,7 +26,7 @@ public class TrainType {
     private int speed;
 
     @Column(name = "costforkm", length = 45)
-    private String costforkm;
+    private int costforkm;
 
     public TrainType() {
     }
@@ -43,16 +47,20 @@ public class TrainType {
         this.speed = speed;
     }
 
-    public String getCostforkm() {
+    public int getCostforkm() {
         return costforkm;
     }
 
-    public void setCostforkm(String costforkm) {
+    public void setCostforkm(int costforkm) {
         this.costforkm = costforkm;
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "trainType")
     private Set<Train> trains;
+
+    public void addTrain(Train train){
+        trains.add(train);
+    }
 
     public Set<Train> getTrains() {
         return trains;
@@ -60,5 +68,29 @@ public class TrainType {
 
     public void setTrains(Set<Train> trains) {
         this.trains = trains;
+    }
+
+    public long getIdTrainType() {
+        return idTrainType;
+    }
+
+    public void setIdTrainType(long idTrainType) {
+        this.idTrainType = idTrainType;
+    }
+
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof TrainType))//changed this from (getClass() != obj.getClass())
+            return false;
+        TrainType other = (TrainType) obj;
+        if(this.getIdTrainType() == other.getIdTrainType() && this.type.equals(other.getType())){
+            return true;
+        }
+        return false;
     }
 }

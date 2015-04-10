@@ -1,5 +1,7 @@
 package com.daria.utils;
 
+import org.apache.log4j.Logger;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -15,6 +17,8 @@ public class DateTime {
     private static final Set<Integer> longMonth = new HashSet<Integer>();
     private static final Set<Integer> shortMonth = new HashSet<Integer>();
     private static final Set<Integer> febriory = new HashSet<Integer>();
+
+    private static final Logger log = Logger.getLogger(DateTime.class.getName());
 
     static{
         longMonth.add(1);
@@ -33,7 +37,7 @@ public class DateTime {
 
     public Date sum(Date date1, Date date2){
         ParseDateTime parseDate1 = new ParseDateTime(date1);
-        ParseDateTime parseDate2 = new ParseDateTime(date1);
+        ParseDateTime parseDate2 = new ParseDateTime(date2);
         int year = parseDate1.year + parseDate2.year;
         int month = parseDate1.month + parseDate2.month;
         int day = parseDate1.day + parseDate2.day;
@@ -57,7 +61,61 @@ public class DateTime {
             day = day - 30;
             month = month + 1;
         } else if (febriory.contains(month % 12)){
-            if (isSpesialYear(year)){
+            if (isSpecialYear(year)){
+                if(day > 29){
+                    month = 3;
+                    day = day - 29;
+                }
+            } else {
+                if(day > 28){
+                    month = 3;
+                    day = day - 28;
+                }
+            }
+        }
+     /*Year*/
+        if(month > 12){
+            year = year + 1;
+            month = month - 12;
+
+        }
+        Date resultDate = null;
+        try {
+            resultDate = sdfDate.parse(String.format("%s-%s-%s %s:%s:00", year, month, day, hour, min));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return resultDate;
+
+    }
+
+    public Date AddTimeOnly(Date date1, Date date2){
+        ParseDateTime parseDate1 = new ParseDateTime(date1);
+        ParseDateTime parseDate2 = new ParseDateTime(date2);
+        int year = parseDate1.year;
+        int month = parseDate1.month;
+        int day = parseDate1.day;
+        int hour = parseDate1.hour + parseDate2.hour;
+        int min = parseDate1.min + parseDate2.min;
+
+        if(min > 59){
+            hour = hour + 1;
+            min = min - 60;
+        }
+        if(hour > 23){
+            day = day + 1;
+            hour = hour - 24;
+        }
+
+     /*MONTHS*/
+        if( day > 31 && longMonth.contains(month % 12)) {
+            day = day - 31;
+            month = month + 1;
+        } else if( day > 30 && shortMonth.contains(month % 12)) {
+            day = day - 30;
+            month = month + 1;
+        } else if (febriory.contains(month % 12)){
+            if (isSpecialYear(year)){
                 if(day > 29){
                     month = 3;
                     day = day - 29;
@@ -86,6 +144,42 @@ public class DateTime {
     }
 
 
+    public Date getTimeOnly(Date time) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+
+        ParseDateTime parse = new ParseDateTime(time);
+        Date newDate = null;
+        try {
+            newDate = sdfDate.parse(String.format("0000-00-00 %s:%s:00", parse.hour, parse.min));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDate;
+    }
+
+
+    /*Return date format for number of hours.
+   We assume that input number of ours cant be more than numbers of hours in one month. */
+    public Date createDateFromDouble(double hours){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date newDate = null;
+        double forHours = hours % 24;
+        int day = (int) (hours / 24);
+        double forMin =  hours % 1;
+        int hour =(int) (forHours / 1);
+        int min = (int) (forMin * 60);
+        log.info("Input " + hours);
+        log.info("Day " + day);
+        log.info("Hour " + hour);
+        log.info("Min " + min);
+        try {
+            newDate = sdfDate.parse(String.format("0000-00-%s %s:%s:00", day, hour, min));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDate;
+    }
+
     private class ParseDateTime{
         int year;
         int month;
@@ -100,21 +194,23 @@ public class DateTime {
             String[] dateAndTime = strDate.toString().split(" ");
             String stDate = dateAndTime[0];
             String stTime = dateAndTime[1];
+            try {
+                String[] timeParse = stTime.split(":");
+                this.hour = Integer.parseInt(timeParse[0]);
+                this.min = Integer.parseInt(timeParse[1]);
+                this.sec = Integer.parseInt(timeParse[2]);
 
-            String[] timeParse = stTime.split(":");
-            this.hour = Integer.parseInt(timeParse[0]);
-            this.min = Integer.parseInt(timeParse[1]);
-            this.sec = Integer.parseInt(timeParse[2]);
-
-            String[] dateParse = stTime.split("-");
-            this.year = Integer.parseInt(dateParse[0]);
-            this.month = Integer.parseInt(dateParse[1]);
-            this.day = Integer.parseInt(dateParse[2]);
-
+                String[] dateParse = stDate.split("-");
+                this.year = Integer.parseInt(dateParse[0]);
+                this.month = Integer.parseInt(dateParse[1]);
+                this.day = Integer.parseInt(dateParse[2]);
+            } catch (NumberFormatException e) {
+                log.error("Can't parse: " + date + " NumberFormatException: " + e);
+            }
         }
     }
 
-    private boolean isSpesialYear(int year){
+    private boolean isSpecialYear(int year){
         if(year % 4 != 0){
             return false;
         }
@@ -126,4 +222,6 @@ public class DateTime {
         }
         return false;
     }
+
+
 }

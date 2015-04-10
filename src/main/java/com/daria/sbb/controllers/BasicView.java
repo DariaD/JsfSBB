@@ -29,7 +29,7 @@ public class BasicView {
         User userFromBase = userEJB.login(text, password);
         if(userFromBase != null){
               session.setAttribute("user", userFromBase);
-          if(text.equals("admin") || text.equals("1")){
+          if(text.toLowerCase().equals("admin") || text.equals("1")){
               session.setAttribute("role", "admin");
               return "/pages/admin/welcomeAdmin.xhtml";
           } else {

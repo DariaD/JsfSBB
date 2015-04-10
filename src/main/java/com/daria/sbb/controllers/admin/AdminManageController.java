@@ -1,14 +1,17 @@
-package com.daria.sbb.controllers;
+package com.daria.sbb.controllers.admin;
 
 import com.daria.sbb.ejb.RouteEJB;
 import com.daria.sbb.ejb.StationEJB;
 import com.daria.sbb.jpa.entities.Route;
 import com.daria.sbb.jpa.entities.Station;
 import com.daria.sbb.jpa.stuff.RouteRecord;
+import org.apache.log4j.Logger;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 import java.io.Serializable;
 import java.io.SerializablePermission;
 import java.util.*;
@@ -21,10 +24,13 @@ import java.util.*;
 @SessionScoped
 public class AdminManageController implements Serializable {
 
-    private String messages;
+    private static final Logger log = Logger.getLogger(AdminManageController.class.getName());
+
+
+    private String message;
     private String newStationName;
-    private int idStation = 0;
-    private int idRoute = 0;
+    private int idStation;
+    private int idRoute;
     private TreeSet<String> stations = new TreeSet<String>();
     private List<RouteRecord> routesList = new ArrayList<RouteRecord>();
     private Map<String, Station> stationMap = new TreeMap<String, Station>();
@@ -41,34 +47,47 @@ public class AdminManageController implements Serializable {
 
     public void addNewRoute(){
         if(routeEJB.isExist(stationOne, stationTwo)){
-            messages = "Such route already exist.";
+            message = "Such route already exist.";
+            log.info(message);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
+            facesContext.addMessage(null, facesMessage);
         } else {
             Route newRoute = new Route();
-//            Station st1 = stationEJB.findByName(stationOne);
-//            Station st2 = stationEJB.findByName(stationTwo);
             stationOne.addStationTwo(newRoute);
             stationTwo.addStationTwo(newRoute);
             newRoute.setStationOne(stationOne);
             newRoute.setStationTwo(stationTwo);
-//            try {
                 int dist = Integer.parseInt(distance);
                 newRoute.setDistance(dist);
                 routeEJB.addNew(newRoute);
-                messages = "Route add successfully";
-  //          } catch ()
+            message = "Route add successfully";
+            log.info(message);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
+            facesContext.addMessage(null, facesMessage);
 
         }
     }
 
-    public void addNewStation(){
+    public String addNewStation(){
         if(stationEJB.isExist(newStationName)){
-            messages = "Such station already exist.";
+            message = "Such station already exist.";
+            log.info(message);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
+            facesContext.addMessage(null, facesMessage);
         } else {
             Station newStation = new Station();
             newStation.setName(newStationName);
             stationEJB.addNew(newStation);
-            messages = "Station add successfully";
+            message = "Station add successfully";
+            log.info(message);
+            FacesContext facesContext = FacesContext.getCurrentInstance();
+            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
+            facesContext.addMessage(null, facesMessage);
         }
+        return "";
     }
 
     public void setNewStationName(String newStationName) {
@@ -80,11 +99,11 @@ public class AdminManageController implements Serializable {
     }
 
     public String getMessages() {
-        return messages;
+        return message;
     }
 
     public void setMessages(String messages) {
-        this.messages = messages;
+        this.message = messages;
     }
 
     public TreeSet<String> getStations() {
@@ -101,12 +120,17 @@ public class AdminManageController implements Serializable {
     }
 
     public int getIdStation() {
-        setIdStation(idStation + 1);
+        if (stations.size() == 0){
+            this.idStation = 0;
+        } else {
+            setIdStation(idStation + 1);
+
+        }
         return idStation;
     }
 
     public void setIdStation(int id) {
-        this.idStation = id;
+            this.idStation = id;
     }
 
     public Station getStationOne() {
@@ -131,7 +155,11 @@ public class AdminManageController implements Serializable {
     }
 
     public void setIdRoute(int idRoute) {
-        this.idRoute = idRoute;
+        if(routesList.size()>0) {
+            this.idRoute = idRoute % routesList.size();
+        } else{
+            this.idRoute = idRoute;
+        }
     }
 
     public List<RouteRecord> getRoutesList() {
@@ -167,6 +195,7 @@ public class AdminManageController implements Serializable {
     }
 
     public Map<String, Station> getStationMap() {
+        setIdStation(0);
         List<Station> stationList = stationEJB.findStation();
         for (Station station : stationList) {
             stationMap.put(station.getName(), station);

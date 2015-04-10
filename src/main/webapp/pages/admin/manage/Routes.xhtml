@@ -15,7 +15,10 @@
 <h:body>
     <h2>Welcome Administrator! :) </h2>
 
+
     <h:form>
+        <h3> Add new route</h3>
+
         <p:messages id="messages" showDetail="true" autoUpdate="true" />
         <h:panelGrid columns="2" cellpadding="5">
 
@@ -32,12 +35,14 @@
             <p:inputText id="distance" value="#{adminManageController.distance}" >
                 <f:validator validatorId="DistanceValidator" />
             </p:inputText>
-            <p:commandButton value="Add Route" action="#{adminManageController.addNewRoute}"/>
+            <p:commandButton value="Add Route" update="tbl" action="#{adminManageController.addNewRoute}"/>
         </h:panelGrid>
 
-    </h:form>
 
-    <h:form>
+        <p:separator />
+
+        <h3> Existing routes </h3>
+
         <p:dataTable id="tbl" var="route" value="#{adminManageController.routesList}"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                      paginator="true" rows="10" style="margin-bottom:20px">

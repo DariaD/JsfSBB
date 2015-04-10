@@ -23,10 +23,26 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>*.xhtml</from-view-id>
+        <from-view-id>/*.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>index</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/admin/manage/Departures.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/admin/manage/resultPages/DepartureResult.xhtml</to-view-id>
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/admin/manage/resultPages/DepartureResult.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>departure</from-outcome>
+            <to-view-id>/pages/admin/manage/Departures.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
