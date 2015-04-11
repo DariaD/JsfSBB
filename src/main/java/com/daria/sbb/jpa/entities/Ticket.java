@@ -30,21 +30,10 @@ public class Ticket {
         return "Ticket{" +
                 "id=" + idTicket +
                 "User =" + user.toString() +
-                "Train =" + scheduleRecord.toString() +
                 '}';
     }
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "IdSchedule", nullable = false)
-    private Schedule scheduleRecord;
 
-    public Schedule getSchedule() {
-        return scheduleRecord;
-    }
-
-    public void setSchedule(Schedule scheduleRecord) {
-        this.scheduleRecord = scheduleRecord;
-    }
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
     @JoinColumn(name = "idUser", nullable = false)

@@ -62,7 +62,7 @@ public class Station {
             if (!(obj instanceof Station))//changed this from (getClass() != obj.getClass())
                 return false;
             Station other = (Station) obj;
-            if(this.getId() == other.getId() && this.name.equals(other.getName())){
+            if(this.getId() == other.getId() && this.getName().equals(other.getName())){
                 return true;
             }
             return false;
@@ -73,53 +73,6 @@ public class Station {
         return new HashCodeBuilder(17, 31).append(idStation).append(name).toHashCode();
     }
 
-
-
-//    @ManyToMany
-//    @JoinTable(name="stopstation")
-//    private Set<Train> trains;
-//
-//    public Set<Train> getTrain() {
-//        return trains;
-//    }
-//
-//    public void setTrain(Set<Train> trains) {
-//        this.trains = trains;
-//    }
-
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationFrom")
-    private Set<Schedule> stationFrom;
-
-    public Set<Schedule> getScheduleFrom() {
-        return stationFrom;
-    }
-
-    public void setScheduleFrom(Set<Schedule> stopStation) {
-        this.stationFrom = stopStation;
-    }
-
-    public void addScheduleFrom(Schedule schedule) {
-        stationFrom.add(schedule);
-    }
-
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTo")
-    private Set<Schedule> stationTo;
-
-    public Set<Schedule> getScheduleTo() {
-        return stationTo;
-    }
-
-    public void setScheduleTo(Set<Schedule> stopStation) {
-        this.stationTo = stopStation;
-    }
-
-    public void addScheduleTo(Schedule schedule) {
-        stationTo.add(schedule);
-    }
-
-
-
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationOne")
     private Set<Route> stationOne;
 
@@ -127,91 +80,75 @@ public class Station {
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTwo")
     private Set<Route> stationTwo;
 
-
-    public Set<Schedule> getStationFrom() {
-        return stationFrom;
-    }
-
-    public void setStationFrom(Set<Schedule> stationFrom) {
-        this.stationFrom = stationFrom;
-    }
-
-    public Set<Schedule> getStationTo() {
-        return stationTo;
-    }
-
-    public void setStationTo(Set<Schedule> stationTo) {
-        this.stationTo = stationTo;
-    }
-
-    public Set<TrainDeparture> getStationsFormList() {
-        return stationsFormList;
-    }
-
-    public void setStationsFormList(Set<TrainDeparture> stationsFormList) {
-        this.stationsFormList = stationsFormList;
-    }
-
-    public Set<TrainDeparture> getStationToList() {
-        return stationToList;
-    }
-
-    public void setStationToList(Set<TrainDeparture> stationToList) {
-        this.stationToList = stationToList;
-    }
-
-    public Set<StopStation> getStopStations() {
-        return stopStations;
-    }
-
-    public void setStopStations(Set<StopStation> stopStations) {
-        this.stopStations = stopStations;
-    }
+//
+//    public Set<TrainDeparture> getStationsFormList() {
+//        return stationsFormList;
+//    }
+//
+//    public void setStationsFormList(Set<TrainDeparture> stationsFormList) {
+//        this.stationsFormList = stationsFormList;
+//    }
+//
+//    public Set<TrainDeparture> getStationToList() {
+//        return stationToList;
+//    }
+//
+//    public void setStationToList(Set<TrainDeparture> stationToList) {
+//        this.stationToList = stationToList;
+//    }
+//
+//    public Set<StopStation> getStopStations() {
+//        return stopStations;
+//    }
+//
+//    public void setStopStations(Set<StopStation> stopStations) {
+//        this.stopStations = stopStations;
+//    }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationFrom")
     private Set<TrainDeparture> stationsFormList = new HashSet<TrainDeparture>();
 
-    public void addStopForm(TrainDeparture ss){
-        stationsFormList.add(ss);
-    }
+//    public void addStopForm(TrainDeparture ss){
+//        stationsFormList.add(ss);
+//    }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationTo")
     private Set<TrainDeparture> stationToList = new HashSet<TrainDeparture>();
-
-    public void addStopTo(TrainDeparture ss){
-        stationToList.add(ss);
-    }
-
-    public Set<Route> getStationOne() {
-        return stationOne;
-    }
-
-    public void setStationOne(Set<Route> stationOne) {
-        this.stationOne = stationOne;
-    }
-
-
-
-    public Set<Route> getStationTwo() {
-        return stationTwo;
-    }
-
-    public void setStationTwo(Set<Route> stationTwo) {
-        this.stationTwo = stationTwo;
-    }
-
-    public void addStationOne(Route route) {
-        stationOne.add(route);
-    }
-
-    public void addStationTwo(Route route) {
-        stationTwo.add(route);
-    }
+//
+//    public void addStopTo(TrainDeparture ss){
+//        stationToList.add(ss);
+//    }
+//
+//    public Set<Route> getStationOne() {
+//        return stationOne;
+//    }
+//
+//    public void setStationOne(Set<Route> stationOne) {
+//        this.stationOne = stationOne;
+//    }
+//
+//
+//
+//    public Set<Route> getStationTwo() {
+//        return stationTwo;
+//    }
+//
+//    public void setStationTwo(Set<Route> stationTwo) {
+//        this.stationTwo = stationTwo;
+//    }
+//
+//    public void addStationOne(Route route) {
+//        stationOne.add(route);
+//    }
+//
+//    public void addStationTwo(Route route) {
+//        stationTwo.add(route);
+//    }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "station")
     private Set<StopStation> stopStations;
 
-    public void addStopStation(StopStation stopStation) {
-        stopStations.add(stopStation);
-    }
+//    public void addStopStation(StopStation stopStation) {
+//        stopStations.add(stopStation);
+//    }
 }

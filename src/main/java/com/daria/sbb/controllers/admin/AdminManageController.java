@@ -46,6 +46,7 @@ public class AdminManageController implements Serializable {
     RouteEJB routeEJB = new RouteEJB();
 
     public void addNewRoute(){
+        log.info(String.format("Try add new route from %s to %s", stationOne.getName(), stationTwo.getName()));
         if(routeEJB.isExist(stationOne, stationTwo)){
             message = "Such route already exist.";
             log.info(message);
@@ -54,13 +55,11 @@ public class AdminManageController implements Serializable {
             facesContext.addMessage(null, facesMessage);
         } else {
             Route newRoute = new Route();
-            stationOne.addStationTwo(newRoute);
-            stationTwo.addStationTwo(newRoute);
             newRoute.setStationOne(stationOne);
             newRoute.setStationTwo(stationTwo);
-                int dist = Integer.parseInt(distance);
-                newRoute.setDistance(dist);
-                routeEJB.addNew(newRoute);
+            int dist = Integer.parseInt(distance);
+            newRoute.setDistance(dist);
+            routeEJB.addNew(newRoute);
             message = "Route add successfully";
             log.info(message);
             FacesContext facesContext = FacesContext.getCurrentInstance();

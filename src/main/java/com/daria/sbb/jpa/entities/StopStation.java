@@ -1,5 +1,7 @@
 package com.daria.sbb.jpa.entities;
 
+import org.apache.commons.lang3.builder.HashCodeBuilder;
+
 import javax.persistence.*;
 import java.util.Date;
 
@@ -12,19 +14,16 @@ import java.util.Date;
 
 @NamedQueries({
         @NamedQuery(name = "StopStation.getAll", query = "SELECT c from StopStation c"),
-        @NamedQuery(name = "StopStation.findByStation", query = "SELECT c FROM StopStation c WHERE c.station = :station"),
-        @NamedQuery(name = "StopStation.getByDateAndName", query = "SELECT c FROM StopStation c WHERE c.station = :station AND c.date = :date")
+        @NamedQuery(name = "StopStation.getByStation", query = "SELECT c FROM StopStation c WHERE c.station = :station"),
 })
 public class StopStation {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idStopStation;
 
     @Column(name = "Date")
     private Date date;
-
-
 
     @Column(name = "CurrPlaceAvalable")
     private int currPlaceAvalable;
@@ -76,5 +75,28 @@ public class StopStation {
 
     public void setIdStopStation(long idStopStation) {
         this.idStopStation = idStopStation;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof StopStation))//changed this from (getClass() != obj.getClass())
+            return false;
+        StopStation other = (StopStation) obj;
+        if(this.getIdStopStation() == other.getIdStopStation()
+            //&& this.getStation().equals(other.getStation())
+//           && this.getDate().equals(other.getDate())
+        ){
+            return true;
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return new HashCodeBuilder(17, 39).append(idStopStation).append(station).append(date).toHashCode();
     }
 }

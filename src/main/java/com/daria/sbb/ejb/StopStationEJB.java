@@ -1,5 +1,6 @@
 package com.daria.sbb.ejb;
 
+import com.daria.sbb.jpa.entities.Station;
 import com.daria.sbb.jpa.entities.StopStation;
 import org.apache.log4j.Logger;
 
@@ -28,10 +29,9 @@ public class StopStationEJB {
         return list;
     }
 
-    public List<StopStation> getByDateAndName(String name, Date date) {
-        TypedQuery<StopStation> query = entityManager.createNamedQuery("StopStation.getByDateAndName", StopStation.class);
-        query.setParameter("station", name);
-        query.setParameter("date", date);
+    public List<StopStation> getByStation(Station station) {
+        TypedQuery<StopStation> query = entityManager.createNamedQuery("StopStation.getByStation", StopStation.class);
+        query.setParameter("station", station);
         List<StopStation> list = query.getResultList();
         return list;
     }
@@ -39,6 +39,7 @@ public class StopStationEJB {
 
     public StopStation addNew(StopStation station) {
         entityManager.merge(station);
+        //entityManager.persist(station);
         return station;
     }
 

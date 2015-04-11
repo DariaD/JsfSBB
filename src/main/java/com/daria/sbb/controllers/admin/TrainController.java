@@ -37,8 +37,6 @@ public class TrainController {
     private Map<String, TrainType> typeMap = new TreeMap<String, TrainType>();
     private int idTrain = 0;
 
-    private String messages;
-
     public String addTrain(){
         Train train = new Train();
         String message;

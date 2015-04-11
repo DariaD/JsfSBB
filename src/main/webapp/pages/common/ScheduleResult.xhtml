@@ -15,24 +15,6 @@
     <h2>Welcome to GoodWay! You will have a nice trip! :) </h2>
 
     <h3>Schedule:</h3>
-    <h:form>
-        <h:panelGrid columns="2" cellpadding="5">
-
-            <p:outputLabel for="from" value="Station from:" />
-            <p:selectOneMenu  id="from" value="#{scheduleController.selectedStation}" converter="stationConverter"  >
-                <f:selectItems value="#{searchController.stationMap}"/>
-            </p:selectOneMenu >
-
-            <p:outputLabel for="date" value="Date:" />
-            <p:calendar id="date" value="#{scheduleController.date}" mode="inline" />
-
-            <p:commandButton value="Search" action="#{scheduleController.searchTrains}" icon="ui-icon-search" />
-
-
-        </h:panelGrid>
-
-    </h:form>
-
 
     <h:form>
         <h4>Scedule for station:  #{scheduleController.selectedStation.name}</h4>
@@ -42,25 +24,9 @@
 
         <h3> Arrives:</h3>
 
-        <p:dataTable id="tbl" var="station" value="#{scheduleController.arrive}"
+        <p:dataTable id="tbl" var="station" value="#{scheduleController.arriveList}"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                      paginator="true" rows="10" style="margin-bottom:20px">
-
-            <f:facet name="Existing Stations">
-
-                <h:commandLink>
-                    <p:graphicImage name="/demo/images/pdf.png" width="24"/>
-                    <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
-                </h:commandLink>
-
-            </f:facet>
-
-            <p:column>
-                <f:facet name="header">
-                    <h:outputText value="Station" />
-                </f:facet>
-                <h:outputText value="#{station}" />
-            </p:column>
 
             <p:column>
                 <f:facet name="header">
@@ -70,14 +36,36 @@
             </p:column>
             <p:column>
                 <f:facet name="header">
-                    <h:outputText value="Number of available places"/>
+                    <h:outputText value="Station"/>
                 </f:facet>
-                <h:outputText value="#{station.currPlaceAvalable}" />
+                <h:outputText value="#{station.stationName}" />
             </p:column>
 
         </p:dataTable>
 
-        <p:commandButton value="Add another departure"  action="#{departureController.redirect}"   />
+        <p:separator />
+
+        <h3> Departure:</h3>
+
+        <p:dataTable id="tb2" var="station" value="#{scheduleController.departureList}"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                     paginator="true" rows="10" style="margin-bottom:20px">
+
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Date and Time"/>
+                </f:facet>
+                <h:outputText value="#{station.date}" />
+            </p:column>
+            <p:column>
+                <f:facet name="header">
+                    <h:outputText value="Station"/>
+                </f:facet>
+                <h:outputText value="#{station.stationName}" />
+            </p:column>
+
+        </p:dataTable>
+
     </h:form>
 
 

@@ -72,20 +72,6 @@ public class Train {
 //        this.stopStation = stopStation;
 //    }
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "train")
-    private Set<Schedule> stopStation;
-
-    public Set<Schedule> getStopStation() {
-        return stopStation;
-    }
-
-    public void setStopStation(Set<Schedule> stopStation) {
-        this.stopStation = stopStation;
-    }
-
-    public void addSchedule(Schedule stop) {
-        stopStation.add(stop);
-    }
 
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})

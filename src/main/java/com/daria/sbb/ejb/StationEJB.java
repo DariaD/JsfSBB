@@ -32,6 +32,11 @@ public class StationEJB {
         return station;
     }
 
+//    public Station update(Station station) {
+//        entityManager.update(station);
+//        return station;
+//    }
+
     public boolean isExist(String newStationName) {
         log.info("Start check station with name: " + newStationName);
         TypedQuery<Station> query = entityManager.createNamedQuery("Station.findByName", Station.class);

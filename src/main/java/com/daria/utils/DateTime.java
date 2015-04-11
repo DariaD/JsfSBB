@@ -115,12 +115,18 @@ public class DateTime {
             day = day - 30;
             month = month + 1;
         } else if (febriory.contains(month % 12)){
+            log.info("Month is febriory");
             if (isSpecialYear(year)){
+                log.info("Year is special " + year);
                 if(day > 29){
                     month = 3;
                     day = day - 29;
+                    log.info("Current day: " + day + "in March ");
+                } else {
+                    log.info("Current day: " + day + "in Febriory ");
                 }
             } else {
+                log.info("Year is not special " + year );
                 if(day > 28){
                     month = 3;
                     day = day - 28;
@@ -168,12 +174,30 @@ public class DateTime {
         double forMin =  hours % 1;
         int hour =(int) (forHours / 1);
         int min = (int) (forMin * 60);
-        log.info("Input " + hours);
-        log.info("Day " + day);
-        log.info("Hour " + hour);
-        log.info("Min " + min);
+//        log.info("Input " + hours);
+//        log.info("Day " + day);
+//        log.info("Hour " + hour);
+//        log.info("Min " + min);
         try {
             newDate = sdfDate.parse(String.format("0000-00-%s %s:%s:00", day, hour, min));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return newDate;
+    }
+
+    public String getTimeAsString(Date date) {
+        ParseDateTime parse = new ParseDateTime(date);
+        return String.format("%s:%s", parse.hour, parse.min);
+    }
+
+    public Date getDateOnly(Date date) {
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+
+        ParseDateTime parse = new ParseDateTime(date);
+        Date newDate = null;
+        try {
+            newDate = sdfDate.parse(String.format("%s-%s-%s 00:00:00", parse.year, parse.month, parse.day));
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -220,7 +244,7 @@ public class DateTime {
         if (year % 100 == 0){
             return false;
         }
-        return false;
+        return true;
     }
 
 
