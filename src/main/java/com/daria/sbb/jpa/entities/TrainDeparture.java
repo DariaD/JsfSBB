@@ -12,13 +12,15 @@ import java.util.Set;
 @Entity
 @Table(name = "trainDeparture")
 @NamedQueries({
-        @NamedQuery(name = "TrainDeparture.getAll", query = "SELECT c from TrainDeparture  c")
+        @NamedQuery(name = "TrainDeparture.getAll", query = "SELECT c from TrainDeparture  c"),
+        @NamedQuery(name = "TrainDeparture.getById", query = "SELECT c FROM TrainDeparture c WHERE c.idTrainDeparture = :idTrainDeparture"),
+        @NamedQuery(name = "TrainDeparture.getSingleOne", query = "SELECT c FROM TrainDeparture c WHERE c.stationFrom = :stationFrom AND  c.stationTo = :stationTo AND c.departureTime = :departureTime ")
 })
 
 public class TrainDeparture {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idTrainDeparture;
+    private int idTrainDeparture;
 
     @Column(name = "DepartureTime")
     private Date departureTime;
@@ -37,6 +39,41 @@ public class TrainDeparture {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "trainDeparture")
     private Set<StopStation> stopStations = new HashSet<StopStation>();
+
+
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "trainDeparture")
+    private Set<Ticket> tickets = new HashSet<Ticket>();
+
+
+    @Override
+    public String toString() {
+        return "Station{" +
+                "id=" + idTrainDeparture +
+                ", date='" + departureTime +
+                ", stationFrom='" + stationFrom +
+                ", stationTo='" + stationTo +
+                ", train='" + train +
+                ", stopStationsNumber = " + stopStations.size() +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (!(obj instanceof TrainDeparture))//changed this from (getClass() != obj.getClass())
+            return false;
+        TrainDeparture other = (TrainDeparture) obj;
+        if(this.getIdTrainDeparture() == other.getIdTrainDeparture()
+//            && this.departureTime.equals(other.departureTime)
+//            && this.train.equals(other.train)
+                ){
+            return true;
+        }
+        return false;
+    }
 
     public void addStopStation(StopStation ss){
         stopStations.add(ss);
@@ -67,11 +104,11 @@ public class TrainDeparture {
         this.stopStations = stopStations;
     }
 
-    public long getIdTrainDeparture() {
+    public int getIdTrainDeparture() {
         return idTrainDeparture;
     }
 
-    public void setIdTrainDeparture(long idTrainDeparture) {
+    public void setIdTrainDeparture(int idTrainDeparture) {
         this.idTrainDeparture = idTrainDeparture;
     }
 
@@ -90,4 +127,13 @@ public class TrainDeparture {
     public void setStationTo(Station stationTo) {
         this.stationTo = stationTo;
     }
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setTickets(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
 }

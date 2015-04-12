@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+        >
+
+<h:head>
+    <title>GoodWay</title>
+    <ui:include src="/pages/user/userMenu.xhtml" />
+</h:head>
+<h:body>
+    <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="1">
+        <h3>Congratulations! You have bogth a ticket!</h3>
+        <p:separator />
+        <h3>Trip ditail:</h3>
+
+        <h4>From: #{searchController.selectedStationFrom.name}   </h4>
+        <h4>Time departure: #{searchController.departureDate}   </h4>
+        <h4>To: #{searchController.selectedStationTo.name}   </h4>
+        <h4>Time arrive: #{searchController.arriveDate}   </h4>
+        <h4>Time of journey: #{searchController.timeOfJuorney}   </h4>
+        <h4>Passenger: #{searchController.user.firstName} #{searchController.user.secondName}   </h4>
+        <p:separator />
+    </h:panelGrid>
+
+    <h3>Thank you for using GoodWay Company! We hope to see you soon again! ^_^ </h3>
+
+</h:body>
+</html>

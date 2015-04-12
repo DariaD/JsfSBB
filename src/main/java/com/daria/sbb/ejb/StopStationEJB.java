@@ -2,6 +2,7 @@ package com.daria.sbb.ejb;
 
 import com.daria.sbb.jpa.entities.Station;
 import com.daria.sbb.jpa.entities.StopStation;
+import com.daria.sbb.jpa.entities.TrainDeparture;
 import org.apache.log4j.Logger;
 
 import javax.ejb.Stateless;
@@ -43,4 +44,10 @@ public class StopStationEJB {
         return station;
     }
 
+    public List<StopStation> getByDepartureID(TrainDeparture trainDeparture) {
+        TypedQuery<StopStation> query = entityManager.createNamedQuery("StopStation.getByDepartureID", StopStation.class);
+        query.setParameter("trainDeparture", trainDeparture);
+        List<StopStation> list = query.getResultList();
+        return list;
+    }
 }

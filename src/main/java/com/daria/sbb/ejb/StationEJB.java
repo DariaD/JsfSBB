@@ -26,16 +26,10 @@ public class StationEJB {
         return list;
     }
 
-
     public Station addNew(Station station) {
         entityManager.merge(station);
         return station;
     }
-
-//    public Station update(Station station) {
-//        entityManager.update(station);
-//        return station;
-//    }
 
     public boolean isExist(String newStationName) {
         log.info("Start check station with name: " + newStationName);

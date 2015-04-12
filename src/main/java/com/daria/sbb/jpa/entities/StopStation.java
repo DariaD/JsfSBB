@@ -15,6 +15,7 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = "StopStation.getAll", query = "SELECT c from StopStation c"),
         @NamedQuery(name = "StopStation.getByStation", query = "SELECT c FROM StopStation c WHERE c.station = :station"),
+        @NamedQuery(name = "StopStation.getByDepartureID", query = "SELECT c FROM StopStation c WHERE c.trainDeparture = :trainDeparture")
 })
 public class StopStation {
 
@@ -27,6 +28,9 @@ public class StopStation {
 
     @Column(name = "CurrPlaceAvalable")
     private int currPlaceAvalable;
+
+    @Column(name = "distanceFromStart")
+    private int distanceFromStart;
 
     /*One station can be in several schedules*/
     @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
@@ -97,6 +101,26 @@ public class StopStation {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 39).append(idStopStation).append(station).append(date).toHashCode();
+        return new HashCodeBuilder(17, 39).append(idStopStation).toHashCode();
+    }
+
+    @Override
+    public String toString(){
+        return "StopStation{" +
+                "id=" + idStopStation +
+                ", date='" + date +
+                ", currPlaceAvalable='" + currPlaceAvalable +
+                ", trainDeparture='" + trainDeparture.toString() +
+                ", station='" + station.toString() +
+                '}';
+
+    }
+
+    public int getDistanceFromStart() {
+        return distanceFromStart;
+    }
+
+    public void setDistanceFromStart(int distanceFromStart) {
+        this.distanceFromStart = distanceFromStart;
     }
 }

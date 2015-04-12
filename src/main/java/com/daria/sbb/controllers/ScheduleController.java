@@ -42,6 +42,9 @@ public class ScheduleController  implements Serializable {
         arriveList.clear();
         departureList.clear();
         List<StopStation> stopList = stopStationEJB.getByStation(selectedStation);
+        if(date == null){
+            return "";
+        }
         for (StopStation stopStation : stopList) {
             Date dateStop = stopStation.getDate();
             if(!dt.getDateOnly(dateStop).equals(dt.getDateOnly(date))){

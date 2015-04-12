@@ -42,10 +42,10 @@
             <p:calendar id="date" value="#{registrationController.date}" locale="en" navigator="true" pattern="yyyy-MMM-dd" required="true">
                 <f:validator validatorId="DateValidator" />
             </p:calendar>
-            <h:outputText value="Plese enter correct date or use calendar window. If you enter somthing like 1995-feb-30 the system create your birthday like 1995-mar-2"  />
             <p:commandButton value="Registrate" action="#{registrationController.addUser}"/>
         </h:panelGrid>
 
+        <h:outputText value="NOTE: Plese enter correct date or use calendar window. If you enter somthing like 1995-feb-30 the system create your birthday like 1995-mar-2"  />
     </h:form>
 
 </h:body>

@@ -10,15 +10,15 @@
 
 <h:head>
     <title>Login Error</title>
-    <ui:include src="/guest/commanMenu.xhtml" />
+    <ui:include src="/pages/common/commonMenu.xhtml" />
 </h:head>
 <h:body bgcolor="white">
     <h3>JSF 2.0 Hello World Example - welcome.xhtml</h3>
     <h4>Login or password is not correct. Pleas try again or registrate.</h4>
     <h:form>
         <h:panelGrid columns="2" cellpadding="5">
-            <p:commandButton value="Login"  action="#{registrationController.loginRedirect}" />
-            <p:commandButton value="Registration"  action="#{registrationController.registrationRedirect}"  />
+            <p:commandButton value="Login"  action="#{registrationController.loginRedirect}" ajax="false"/>
+            <p:commandButton value="Registration"  action="#{registrationController.registrationRedirect}" ajax="false" />
         </h:panelGrid>
 
     </h:form>

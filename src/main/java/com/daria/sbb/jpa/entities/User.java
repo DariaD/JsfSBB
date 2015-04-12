@@ -2,6 +2,7 @@ package com.daria.sbb.jpa.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.Set;
 
 /**
  * Created by Дарья on 08.03.2015.
@@ -71,19 +72,19 @@ public class User {
 
 
 
-//    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
-//    private Set<Ticket> tickets;
-//
-//    public Set<Ticket> getTickets() {
-//        return tickets;
-//    }
-//
-//    public void setStationTo(Set<Ticket> tickets) {
-//        this.tickets = tickets;
-//    }
-//
-//
-//    public void addTicket(Ticket ticket) {
-//        tickets.add(ticket);
-//    }
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "user")
+    private Set<Ticket> tickets;
+
+    public Set<Ticket> getTickets() {
+        return tickets;
+    }
+
+    public void setStationTo(Set<Ticket> tickets) {
+        this.tickets = tickets;
+    }
+
+
+    public void addTicket(Ticket ticket) {
+        tickets.add(ticket);
+    }
 }

@@ -30,7 +30,6 @@
       <foreign-key name="from_schedule" columns="idStationFrom" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="to_schedule" columns="idStationTo" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="train_Shadule" columns="idTrain" ref-table="train" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idTrain" update-rule="3" delete-rule="3" deferrability="2"/>
-      <exported-key name="ticket_train" table="ticket" schema="" catalog="sbbdatabase" columns="IdSchedule"/>
       <index name="from_idx" unique="false" columns="idStationFrom"/>
       <index name="to_idx" unique="false" columns="idStationTo"/>
       <index name="train_idx" unique="false" columns="idTrain"/>
@@ -53,6 +52,7 @@
       <column name="idStation" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="Date" sqlType="DATETIME" precision="19" scale="0" nullable="false" jdbcType="93"/>
       <column name="CurrPlaceAvalable" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="distanceFromStart" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="idStopStation"/>
       <foreign-key name="ss1" columns="IdDepartureTrain" ref-table="traindeparture" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idTrainDeparture" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="ss2" columns="idStation" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
@@ -68,12 +68,12 @@
     </table>
     <table name="ticket" schema="" catalog="sbbdatabase" type="TABLE">
       <column name="idTicket" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
-      <column name="IdSchedule" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="IdDeparture" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <column name="IdUser" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
       <primary-key name="PRIMARY" columns="idTicket"/>
-      <foreign-key name="ticket_train" columns="IdSchedule" ref-table="schedule" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idSchedule" update-rule="3" delete-rule="3" deferrability="2"/>
+      <foreign-key name="ticket_train" columns="IdDeparture" ref-table="traindeparture" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idTrainDeparture" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="ticket_user" columns="IdUser" ref-table="user" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idUser" update-rule="3" delete-rule="3" deferrability="2"/>
-      <index name="ticket_train_idx" unique="false" columns="IdSchedule"/>
+      <index name="ticket_train_idx" unique="false" columns="IdDeparture"/>
       <index name="ticket_user_idx" unique="false" columns="IdUser"/>
     </table>
     <table name="train" schema="" catalog="sbbdatabase" type="TABLE">
@@ -98,6 +98,7 @@
       <foreign-key name="keykey" columns="idDepStationFrom" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
       <foreign-key name="keykey2" columns="idDepStationTo" ref-table="station" ref-schema="" ref-catalog="sbbdatabase" ref-columns="idStation" update-rule="3" delete-rule="3" deferrability="2"/>
       <exported-key name="ss1" table="stopstation" schema="" catalog="sbbdatabase" columns="IdDepartureTrain"/>
+      <exported-key name="ticket_train" table="ticket" schema="" catalog="sbbdatabase" columns="IdDeparture"/>
       <index name="departureKey_idx" unique="false" columns="idTrain"/>
       <index name="fromKey_idx" unique="false" columns="idDepStationFrom"/>
       <index name="keykey2_idx" unique="false" columns="idDepStationTo"/>

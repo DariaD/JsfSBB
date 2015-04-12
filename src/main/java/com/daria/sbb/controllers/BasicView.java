@@ -11,10 +11,13 @@ import org.jboss.arquillian.core.api.annotation.Inject;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.SessionScoped;
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
 @ManagedBean
-public class BasicView {
+@SessionScoped
+public class BasicView implements Serializable {
 
     private String text;
     private String password;

@@ -150,6 +150,18 @@ public class DateTime {
     }
 
 
+    public boolean equelsByDate(Date date1, Date date2){
+        ParseDateTime parseDate1 = new ParseDateTime(date1);
+        ParseDateTime parseDate2 = new ParseDateTime(date2);
+        if(parseDate1.year == parseDate2.year &&
+           parseDate1.month == parseDate2.month &&
+           parseDate1.day == parseDate2.day ){
+            return true;
+        }
+        return false;
+
+    }
+
     public Date getTimeOnly(Date time) {
         SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
 
@@ -186,6 +198,20 @@ public class DateTime {
         return newDate;
     }
 
+    public String createTimeStringFromDouble(double hours){
+        SimpleDateFormat sdfDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");//dd/MM/yyyy
+        Date newDate = null;
+        double forHours = hours % 24;
+        int day = (int) (hours / 24);
+        double forMin =  hours % 1;
+        int hour =(int) (forHours / 1);
+        int min = (int) (forMin * 60);
+        if (min < 10 && min > 0){
+            return String.format(" %s:0%s", hour, min);
+        }
+        return String.format(" %s:%s", hour, min);
+    }
+
     public String getTimeAsString(Date date) {
         ParseDateTime parse = new ParseDateTime(date);
         return String.format("%s:%s", parse.hour, parse.min);
@@ -202,6 +228,64 @@ public class DateTime {
             e.printStackTrace();
         }
         return newDate;
+    }
+
+    public Date addTenMin(Date currentDate) {
+        ParseDateTime parseDate = new ParseDateTime(currentDate);
+        int year = parseDate.year;
+        int month = parseDate.month;
+        int day = parseDate.day;
+        int hour = parseDate.hour;
+        int min = parseDate.min + 10;
+
+        if(min > 59){
+            hour = hour + 1;
+            min = min - 60;
+        }
+        if(hour > 23){
+            day = day + 1;
+            hour = hour - 24;
+        }
+
+     /*MONTHS*/
+        if( day > 31 && longMonth.contains(month % 12)) {
+            day = day - 31;
+            month = month + 1;
+        } else if( day > 30 && shortMonth.contains(month % 12)) {
+            day = day - 30;
+            month = month + 1;
+        } else if (febriory.contains(month % 12)){
+            log.info("Month is febriory");
+            if (isSpecialYear(year)){
+                log.info("Year is special " + year);
+                if(day > 29){
+                    month = 3;
+                    day = day - 29;
+                    log.info("Current day: " + day + "in March ");
+                } else {
+                    log.info("Current day: " + day + "in Febriory ");
+                }
+            } else {
+                log.info("Year is not special " + year );
+                if(day > 28){
+                    month = 3;
+                    day = day - 28;
+                }
+            }
+        }
+     /*Year*/
+        if(month > 12){
+            year = year + 1;
+            month = month - 12;
+
+        }
+        Date resultDate = null;
+        try {
+            resultDate = sdfDate.parse(String.format("%s-%s-%s %s:%s:00", year, month, day, hour, min));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        return resultDate;
     }
 
     private class ParseDateTime{

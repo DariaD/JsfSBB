@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+        >
+
+<h:head>
+    <title>GoodWay</title>
+    <ui:include src="/pages/user/userMenu.xhtml" />
+</h:head>
+<h:body>
+    <h:form>
+        <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="1">
+        <h2>Dear #{searchController.user.firstName}, please, check your oder information </h2>
+        <p:separator />
+        <h3>Dear Trip ditail</h3>
+
+        <h4>From: #{searchController.selectedStationFrom.name}   </h4>
+        <h4>Time departure: #{searchController.departureDate}   </h4>
+        <h4>To: #{searchController.selectedStationTo.name}   </h4>
+        <h4>Time arrive: #{searchController.arriveDate}   </h4>
+        <h4>Time of journey: #{searchController.timeOfJuorney}   </h4>
+
+        <p:separator />
+        <h3>Personal information</h3>
+
+        <h4>First Name: #{searchController.user.firstName}   </h4>
+        <h4>Second Name: #{searchController.user.secondName}   </h4>
+        <h4>Date of Birth: #{searchController.user.dateOfBirth}   </h4>
+
+
+        <p:separator />
+
+        <h3> Price: </h3>
+        <h4>Price of your order: #{searchController.price} </h4>
+            <p:commandButton value="Back" action="#{searchController.back}" ajax="false"/>
+            <p:commandButton value="Confirm" action="#{searchController.confirm}" ajax="false"/>
+        </h:panelGrid>
+    </h:form>
+</h:body>
+</html>

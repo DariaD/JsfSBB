@@ -23,6 +23,8 @@ public class TrainRecord {
         setType(type);
     }
 
+    public TrainRecord(){};
+
     public String getName() {
         return name;
     }

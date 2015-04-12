@@ -12,25 +12,27 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "ticket")
-@NamedQuery(name = "Ticket.getAll", query = "SELECT c from Ticket  c")
+@NamedQueries({
+        @NamedQuery(name = "Ticket.getAll", query = "SELECT c from Ticket  c"),
+        @NamedQuery(name="Ticket.findByUserAndTrain", query="SELECT c FROM Ticket c WHERE c.user = :user AND c.trainDeparture =:trainDeparture"),
+        @NamedQuery(name="Ticket.findByDeparture", query="SELECT c FROM Ticket c WHERE c.trainDeparture =:trainDeparture")
+})
 public class Ticket {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long idTicket;
 
-    public Ticket() {}
+    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
+    @JoinColumn(name = "IdDeparture", nullable = false)
+    private TrainDeparture trainDeparture;
 
-    public long getId() {
-        return idTicket;
+    public TrainDeparture getTrainDeparture() {
+        return trainDeparture;
     }
 
-    @Override
-    public String toString() {
-        return "Ticket{" +
-                "id=" + idTicket +
-                "User =" + user.toString() +
-                '}';
+    public void setTrainDeparture(TrainDeparture trainDeparture) {
+        this.trainDeparture = trainDeparture;
     }
 
 
@@ -45,5 +47,19 @@ public class Ticket {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Ticket() {}
+
+    public long getId() {
+        return idTicket;
+    }
+
+    @Override
+    public String toString() {
+        return "Ticket{" +
+                "id=" + idTicket +
+                "User =" + user.toString() +
+                '}';
     }
 }

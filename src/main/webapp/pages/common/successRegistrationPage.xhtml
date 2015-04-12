@@ -12,11 +12,13 @@
     <ui:include src="/pages/common/commonMenu.xhtml" />
 </h:head>
 <h:body>
+    <h:form>
     <h2> Congratulations! #{registrationController.firstName} #{registrationController.secondName}, you have successfuly registrated!  </h2>
 
     <h3>Please login to continue.</h3>
-    <h:form>
+        <h:panelGrid columns="2" cellpadding="5">
             <p:commandButton value="Login" action="index"/>
+        </h:panelGrid>
     </h:form>
 
 </h:body>

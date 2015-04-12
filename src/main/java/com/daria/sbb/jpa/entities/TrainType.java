@@ -88,7 +88,9 @@ public class TrainType {
         if (!(obj instanceof TrainType))//changed this from (getClass() != obj.getClass())
             return false;
         TrainType other = (TrainType) obj;
-        if(this.getIdTrainType() == other.getIdTrainType() && this.type.equals(other.getType())){
+        if(this.getIdTrainType() == other.getIdTrainType()
+              //  && this.type.equals(other.getType())
+                ){
             return true;
         }
         return false;

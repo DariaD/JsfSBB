@@ -11,14 +11,17 @@
         <navigation-case>
             <from-outcome>welcomUser</from-outcome>
             <to-view-id>/pages/user/welcomUser.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>welcomAdmin</from-outcome>
             <to-view-id>/pages/admin/welcomeAdmin.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
         <navigation-case>
             <from-outcome>nosuchuser</from-outcome>
             <to-view-id>/pages/error/unknown.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
 
@@ -27,6 +30,7 @@
         <navigation-case>
             <from-outcome>index</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
 
@@ -35,6 +39,7 @@
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/pages/admin/manage/resultPages/DepartureResult.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
 
@@ -43,13 +48,59 @@
         <navigation-case>
             <from-outcome>departure</from-outcome>
             <to-view-id>/pages/admin/manage/Departures.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
+
     <navigation-rule>
         <from-view-id>/pages/common/schedule.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/pages/common/ScheduleResult.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
+
+    <navigation-rule>
+        <from-view-id>/pages/user/searchTrain.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>searchResult</from-outcome>
+            <to-view-id>/pages/user/searchResult.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/user/searchResult.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>successBothTicket</from-outcome>
+            <to-view-id>/pages/user/ConfirmBothTicket.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>fail</from-outcome>
+            <to-view-id>/pages/user/FailBothTicket.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
+    <navigation-rule>
+        <from-view-id>/pages/user/ConfirmBothTicket.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/user/SuccessBothTicket.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>back</from-outcome>
+            <to-view-id>/pages/user/searchResult.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>fail</from-outcome>
+            <to-view-id>/pages/user/FailBothTicket.xhtml</to-view-id>
+            <redirect />
         </navigation-case>
     </navigation-rule>
 

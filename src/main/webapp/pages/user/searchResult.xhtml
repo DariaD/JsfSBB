@@ -13,10 +13,27 @@
     <ui:include src="/pages/user/userMenu.xhtml" />
 </h:head>
 <h:body>
-    <h2>You try to find trains from: "#{searchController.selectedStationFrom}" to "#{searchController.selectedStationTo}"  </h2>
-    <h2>Date: "#{searchController.date}"   </h2>
+    <h:form>
+        <h2>You try to find trains from: "#{searchController.selectedStationFrom.name}" to "#{searchController.selectedStationTo.name}"  </h2>
+        <h2>Date: "#{searchController.date}"   </h2>
 
-    <h3> Result: </h3>
+        <p:separator />
 
+        <h3> Search result: </h3>
+        <p:messages id="msg" showDetail="true" autoUpdate="true" />
+        <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="1">
+            <p:outputLabel for="train" value="Trains:" />
+            <p:selectOneRadio id="train" value="#{searchController.selectedTrain}"  converter="trainDepartureConverter" >
+                <f:selectItems value="#{searchController.suitableTrainMap}" var="c" > </f:selectItems>
+                <f:validator validatorId="TicketValidator" />
+            </p:selectOneRadio>
+
+
+        <p:separator />
+
+        <p:commandButton value="By Ticket" ajax="false" action="#{searchController.byTicket}"/>
+
+    </h:panelGrid>
+    </h:form>
 </h:body>
 </html>

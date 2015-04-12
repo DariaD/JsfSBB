@@ -23,7 +23,7 @@
         <p:separator />
 
         <h3> Stop stations on route:</h3>
-
+        <h:panelGrid columns="2" cellpadding="5">
         <p:dataTable id="tbl" var="station" value="#{departureController.stopsList}"
                      paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
                      paginator="true" rows="10" style="margin-bottom:20px">
@@ -58,8 +58,11 @@
             </p:column>
 
         </p:dataTable>
+        </h:panelGrid>
 
-        <p:commandButton value="Add another departure"  action="#{departureController.redirect}"   />
+        <h:panelGrid columns="2" cellpadding="5">
+            <p:commandButton value="Add another departure"  action="#{departureController.redirect}"   />
+        </h:panelGrid>
     </h:form>
 
 

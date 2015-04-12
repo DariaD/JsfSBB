@@ -62,7 +62,9 @@ public class Station {
             if (!(obj instanceof Station))//changed this from (getClass() != obj.getClass())
                 return false;
             Station other = (Station) obj;
-            if(this.getId() == other.getId() && this.getName().equals(other.getName())){
+            if(this.getId() == other.getId()
+                   // && this.getName().equals(other.getName())
+                    ){
                 return true;
             }
             return false;
@@ -70,7 +72,7 @@ public class Station {
 
     @Override
     public int hashCode() {
-        return new HashCodeBuilder(17, 31).append(idStation).append(name).toHashCode();
+        return new HashCodeBuilder(17, 31).append(idStation).toHashCode();
     }
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "stationOne")
