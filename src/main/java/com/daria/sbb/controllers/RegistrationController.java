@@ -6,6 +6,7 @@ import com.daria.sbb.jpa.entities.User;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
+import java.io.Serializable;
 import java.util.Date;
 
 /**
@@ -14,7 +15,7 @@ import java.util.Date;
 
 @ManagedBean
 @SessionScoped
-public class RegistrationController {
+public class RegistrationController implements Serializable {
     @EJB
     private UserEJB userEJB = new UserEJB();
 
@@ -48,8 +49,7 @@ public class RegistrationController {
     }
 
     public String loginRedirect(){
-
-        return "/index";
+        return "index";
     }
 
     public String registrationRedirect(){

@@ -16,6 +16,7 @@ public class RouteRecord {
         setName(name);
         setDistance(dis);
     }
+    public RouteRecord(){}
 
     public String getName() {
         return name;

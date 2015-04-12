@@ -45,12 +45,10 @@ public class TicketValidator implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
         selectedTrain = (TrainDeparture) value;
-        log.info("Input train name: " + selectedTrain.toString());
         SessionUtil sessionUtil = new SessionUtil();
         HttpSession session = sessionUtil.getSession();
         User user = (User) session.getAttribute("user");
         boolean fail = false;
-        log.info("Selected Train: " + selectedTrain);
         if(selectedTrain == null) {
             FacesMessage msg = new FacesMessage("Train is not selected", "Please select the train");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);

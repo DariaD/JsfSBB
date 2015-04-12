@@ -12,6 +12,7 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import java.io.Serializable;
 import java.util.*;
 
 /**
@@ -20,7 +21,7 @@ import java.util.*;
 
 @ManagedBean
 @SessionScoped
-public class TrainController {
+public class TrainController implements Serializable {
 
     private static final Logger log = Logger.getLogger(TrainController.class.getName());
 

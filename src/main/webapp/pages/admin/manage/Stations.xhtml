@@ -35,24 +35,8 @@
         <h3> Existing stations </h3>
 
             <p:dataTable id="tbl" var="station" value="#{adminManageController.stations}"
-                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                         paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
                          paginator="true" rows="10" style="margin-bottom:20px">
-
-                <f:facet name="Existing Stations">
-
-                    <h:commandLink>
-                        <p:graphicImage name="/demo/images/pdf.png" width="24"/>
-                        <p:dataExporter type="pdf" target="tbl" fileName="cars"/>
-                    </h:commandLink>
-
-                </f:facet>
-
-                <p:column>
-                    <f:facet name="header">
-                        <h:outputText value="Id" />
-                    </f:facet>
-                    <h:outputText value="#{adminManageController.idStation}" />
-                </p:column>
 
                 <p:column>
                     <f:facet name="header">

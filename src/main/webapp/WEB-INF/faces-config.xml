@@ -26,7 +26,86 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/*.xhtml</from-view-id>
+        <from-view-id>/pages/admin/manage/resultPages/DepartureResult.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/admin/manage/Common.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/admin/manage/Departures.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>success</from-outcome>
+            <to-view-id>/pages/admin/manage/resultPages/DepartureResult.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/admin/manage/Routes.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>stationError</from-outcome>
+            <to-view-id>/pages/admin/manage/managerError.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/admin/manage/managerError.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/admin/manage/Station.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>stationError</from-outcome>
+            <to-view-id>/managerError.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/admin/manage/Trains.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/admin/TrainsPassengers.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/admin/welcomeAdmin.xhtml</from-view-id>
         <navigation-case>
             <from-outcome>index</from-outcome>
             <to-view-id>/index.xhtml</to-view-id>
@@ -35,32 +114,49 @@
     </navigation-rule>
 
     <navigation-rule>
-        <from-view-id>/pages/admin/manage/Departures.xhtml</from-view-id>
+        <from-view-id>/pages/common/aboutCompany.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>success</from-outcome>
-            <to-view-id>/pages/admin/manage/resultPages/DepartureResult.xhtml</to-view-id>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
-
     <navigation-rule>
-        <from-view-id>/pages/admin/manage/resultPages/DepartureResult.xhtml</from-view-id>
+        <from-view-id>/pages/common/registration.xhtml</from-view-id>
         <navigation-case>
-            <from-outcome>departure</from-outcome>
-            <to-view-id>/pages/admin/manage/Departures.xhtml</to-view-id>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
             <redirect />
         </navigation-case>
     </navigation-rule>
-
     <navigation-rule>
         <from-view-id>/pages/common/schedule.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
         <navigation-case>
             <from-outcome>success</from-outcome>
             <to-view-id>/pages/common/ScheduleResult.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+    </navigation-rule><navigation-rule>
+    <from-view-id>/pages/common/ScheduleResult.xhtml</from-view-id>
+    <navigation-case>
+        <from-outcome>index</from-outcome>
+        <to-view-id>/index.xhtml</to-view-id>
+        <redirect />
+    </navigation-case>
+</navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/common/successRegistrationPage.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
-
 
     <navigation-rule>
         <from-view-id>/pages/user/searchTrain.xhtml</from-view-id>
@@ -69,8 +165,25 @@
             <to-view-id>/pages/user/searchResult.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        <navigation-case>
+            <from-outcome>nosuchtrain</from-outcome>
+            <to-view-id>/pages/user/noSuchTrain.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
-
+    <navigation-rule>
+        <from-view-id>/pages/user/noSuchTrain.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
     <navigation-rule>
         <from-view-id>/pages/user/searchResult.xhtml</from-view-id>
         <navigation-case>
@@ -83,8 +196,12 @@
             <to-view-id>/pages/user/FailBothTicket.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
-
     <navigation-rule>
         <from-view-id>/pages/user/ConfirmBothTicket.xhtml</from-view-id>
         <navigation-case>
@@ -102,6 +219,38 @@
             <to-view-id>/pages/user/FailBothTicket.xhtml</to-view-id>
             <redirect />
         </navigation-case>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
     </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/user/buyTicket.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/user/FailBothTicket.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+    <navigation-rule>
+        <from-view-id>/pages/user/welcomUser.xhtml</from-view-id>
+        <navigation-case>
+            <from-outcome>index</from-outcome>
+            <to-view-id>/index.xhtml</to-view-id>
+            <redirect />
+        </navigation-case>
+    </navigation-rule>
+
+
+
 
 </faces-config>

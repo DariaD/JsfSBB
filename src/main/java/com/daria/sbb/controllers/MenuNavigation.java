@@ -8,28 +8,32 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.Serializable;
 
 /**
  * Created by Дарья on 01.04.2015.
  */
 
 @ManagedBean
-public class MenuNavigation {
+public class MenuNavigation implements Serializable {
     private String selectedMenu;
+
 
     @Inject
     SessionUtil sessionUtil = new SessionUtil();
+    private HttpSession session = sessionUtil.getSession();
 
     private static final Logger log = Logger.getLogger(MenuNavigation.class.getName());
 
 
     public String logout(){
         log.info("Try to logout!!!");
-        HttpSession session = sessionUtil.getSession();
+//        FacesContext facesContext = FacesContext.getCurrentInstance();
+//        HttpSession session = (HttpSession) facesContext.getExternalContext().getSession(false);
         session.setAttribute("user", null);
         session.setAttribute("role", null);
         session.invalidate();
-
+//        return "/index.xhtml";
         return "index";
     }
 
@@ -43,7 +47,6 @@ public class MenuNavigation {
     }
 
     private String selectMenu(){
-        HttpSession session = sessionUtil.getSession();
         if(session == null){
             return "/pages/common/commonMenu.xhtml";
         }
@@ -65,4 +68,5 @@ public class MenuNavigation {
     public void setSelectedMenu(String selectedMenu) {
         this.selectedMenu = selectedMenu;
     }
+
 }

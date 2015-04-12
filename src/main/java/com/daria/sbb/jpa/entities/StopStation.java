@@ -15,6 +15,7 @@ import java.util.Date;
 @NamedQueries({
         @NamedQuery(name = "StopStation.getAll", query = "SELECT c from StopStation c"),
         @NamedQuery(name = "StopStation.getByStation", query = "SELECT c FROM StopStation c WHERE c.station = :station"),
+        @NamedQuery(name = "StopStation.getbyTrainAndStation", query = "SELECT c FROM StopStation c WHERE c.station = :station AND c.trainDeparture = :trainDeparture"),
         @NamedQuery(name = "StopStation.getByDepartureID", query = "SELECT c FROM StopStation c WHERE c.trainDeparture = :trainDeparture")
 })
 public class StopStation {

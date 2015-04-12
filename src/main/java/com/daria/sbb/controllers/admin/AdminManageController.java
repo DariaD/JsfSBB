@@ -45,14 +45,12 @@ public class AdminManageController implements Serializable {
     @EJB
     RouteEJB routeEJB = new RouteEJB();
 
-    public void addNewRoute(){
+    public String addNewRoute(){
         log.info(String.format("Try add new route from %s to %s", stationOne.getName(), stationTwo.getName()));
-        if(routeEJB.isExist(stationOne, stationTwo)){
+        if(routeEJB.isExist(stationOne, stationTwo) ||stationOne.getName().equals(stationTwo.getName()) ){
             message = "Such route already exist.";
             log.info(message);
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
-            facesContext.addMessage(null, facesMessage);
+            return "stationError";
         } else {
             Route newRoute = new Route();
             newRoute.setStationOne(stationOne);
@@ -62,10 +60,7 @@ public class AdminManageController implements Serializable {
             routeEJB.addNew(newRoute);
             message = "Route add successfully";
             log.info(message);
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
-            facesContext.addMessage(null, facesMessage);
-
+            return "";
         }
     }
 
@@ -73,18 +68,13 @@ public class AdminManageController implements Serializable {
         if(stationEJB.isExist(newStationName)){
             message = "Such station already exist.";
             log.info(message);
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_ERROR, message, null);
-            facesContext.addMessage(null, facesMessage);
+            return "stationError";
         } else {
             Station newStation = new Station();
             newStation.setName(newStationName);
             stationEJB.addNew(newStation);
             message = "Station add successfully";
             log.info(message);
-            FacesContext facesContext = FacesContext.getCurrentInstance();
-            FacesMessage facesMessage = new FacesMessage(FacesMessage.SEVERITY_INFO, message, null);
-            facesContext.addMessage(null, facesMessage);
         }
         return "";
     }

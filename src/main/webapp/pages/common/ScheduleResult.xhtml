@@ -25,7 +25,7 @@
         <h3> Arrives:</h3>
 
         <p:dataTable id="tbl" var="station" value="#{scheduleController.arriveList}"
-                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
                      paginator="true" rows="10" style="margin-bottom:20px">
 
             <p:column>
@@ -48,7 +48,7 @@
         <h3> Departure:</h3>
 
         <p:dataTable id="tb2" var="station" value="#{scheduleController.departureList}"
-                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {Exporters}"
+                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} "
                      paginator="true" rows="10" style="margin-bottom:20px">
 
             <p:column>

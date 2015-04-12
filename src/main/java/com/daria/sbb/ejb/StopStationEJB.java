@@ -50,4 +50,12 @@ public class StopStationEJB {
         List<StopStation> list = query.getResultList();
         return list;
     }
+
+    public StopStation getbyTrainAndStation(TrainDeparture selectedTrain, Station selectedStationFrom) {
+        TypedQuery<StopStation> query = entityManager.createNamedQuery("StopStation.getbyTrainAndStation", StopStation.class);
+        query.setParameter("trainDeparture", selectedTrain);
+        query.setParameter("station", selectedStationFrom);
+        List<StopStation> list = query.getResultList();
+        return list.get(0);
+    }
 }

@@ -39,7 +39,7 @@ public class TrainValidation implements Validator {
 
         trainName = value.toString();
         log.info("Input train name: " + trainName);
-        if(trainEJB.isExist(trainName)){
+        if(trainEJB.isExist(trainName)|| trainName.trim().length()==0){
             log.info("Validation failed!");
             FacesMessage msg = new FacesMessage("Such train already exist", "Please choose another train name.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);

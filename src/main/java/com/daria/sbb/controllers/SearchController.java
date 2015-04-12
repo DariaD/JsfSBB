@@ -75,10 +75,10 @@ public class SearchController  implements Serializable {
         suitableTrainMap.clear();
         List<StopStation> listStationFrom = stopStationEJB.getByStation(selectedStationFrom);
         List<StopStation> listStationTo = stopStationEJB.getByStation(selectedStationTo);
-        if(listStationFrom.isEmpty() || listStationTo.isEmpty() ){
+        if(listStationFrom.isEmpty() || listStationTo.isEmpty() || selectedStationFrom.getName().equals(selectedStationTo.getName())){
             FacesMessage msg = new FacesMessage("There is no trains for you request", "Please enter another destination or date.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-            return "";
+            return "nosuchtrain";
         }
 
         for(StopStation stopStationFrom : listStationFrom){
@@ -95,8 +95,6 @@ public class SearchController  implements Serializable {
                     log.info("Find common train for both stations: " + stopStationFrom.getTrainDeparture().getIdTrainDeparture());
                     if(!TrainDepartureList.isEmpty()){
                         TrainDeparture trainDeparture = TrainDepartureList.get(0);
-                        trainDeparture.addStopStation(stopStationFrom);
-                        trainDeparture.addStopStation(stopStationTo);
                         suitableTrain.add(trainDeparture);
                         int distance = stopStationTo.getDistanceFromStart() - stopStationFrom.getDistanceFromStart();
                         double timeInJurney = ((double) distance) / trainDeparture.getTrain().getTrainType().getSpeed();
@@ -128,32 +126,15 @@ public class SearchController  implements Serializable {
         setUser((User) session.getAttribute("user"));
         setDateOfBirth(dt.getDateAsString(user.getDateOfBirth()));
         log.info("Selected Train: " + selectedTrain);
-//        if(selectedTrain == null) {
-//            FacesMessage msg = new FacesMessage("Train is not selected", "Please select the train");
-//            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-//            log.info("Selected Train is null!!!");
-//            return "";
-//        }
-//        log.info("Selected Train: " + selectedTrain);
-//        setAvailablePlaces(getMinNumberOfPlace(selectedTrain));
-//        if(availablePlaces == 0) {
-//            FacesMessage msg = new FacesMessage("There is no free places any more", "Please select another train");
-//            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-//            log.info("No free places!!!");
-//            return "";
-//        }
-//        if(ticketEJB.isExist(user, selectedTrain)){
-//            FacesMessage msg = new FacesMessage("You already registered for this train", "You can't do it twice. Please select another train.");
-//            msg.setSeverity(FacesMessage.SEVERITY_ERROR);
-//            log.info("This user already registered for this train");
-//            return "";
-//        }
+        if(session.getAttribute("user") == null) {
+            log.info("redirect to index");
+          return "index";
+       }
 
         TrainDeparture selectedTrainDeparture = selectedTrain;
         log.info("Mapping okay: " + selectedTrainDeparture.toString());
-        Object[] stopStations = selectedTrainDeparture.getStopStations().toArray();
-        StopStation from = (StopStation) stopStations[0];
-        StopStation to = (StopStation) stopStations[1];
+        StopStation from = stopStationEJB.getbyTrainAndStation(selectedTrain,selectedStationFrom);
+        StopStation to = stopStationEJB.getbyTrainAndStation(selectedTrain, selectedStationTo);
 
         Date currentDate = new Date();
         Date ableDate = dt.addTenMin(currentDate);
@@ -164,15 +145,9 @@ public class SearchController  implements Serializable {
             log.info("No time to get this train");
             return "";
         }
+            setDepartureDate(dt.getDateTimeAsString(from.getDate()));
+            setArriveDate(dt.getDateTimeAsString(to.getDate()));
 
-
-            if (from.getDate().before(to.getDate())) {
-                setDepartureDate(from.getDate().toString());
-                setArriveDate(to.getDate().toString());
-            } else {
-                setDepartureDate(to.getDate().toString());
-                setArriveDate(from.getDate().toString());
-            }
             int distance = Math.abs(from.getDistanceFromStart() - to.getDistanceFromStart());
             double timeInJurney = ((double) distance) / selectedTrainDeparture.getTrain().getTrainType().getSpeed();
             setTimeOfJuorney(dt.createTimeStringFromDouble(timeInJurney));

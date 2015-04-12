@@ -34,10 +34,10 @@ public class LoginController implements Serializable {
               session.setAttribute("user", userFromBase);
           if(text.toLowerCase().equals("admin") || text.equals("1")){
               session.setAttribute("role", "admin");
-              return "/pages/admin/welcomeAdmin.xhtml";
+              return "welcomAdmin";
           } else {
               session.setAttribute("role", "user");
-              return "/pages/user/welcomUser.xhtml";
+              return "welcomUser";
           }
         }
         return "nosuchuser";

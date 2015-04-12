@@ -15,9 +15,9 @@
 <h:body>
     <h:form>
         <h:panelGrid columns="1" style="margin-bottom:10px" cellpadding="1">
-        <h2>Dear #{searchController.user.firstName}, please, check your oder information </h2>
+        <h2>Dear #{searchController.user.firstName}, please, check your order information </h2>
         <p:separator />
-        <h3>Dear Trip ditail</h3>
+        <h3>Dear Trip detail</h3>
 
         <h4>From: #{searchController.selectedStationFrom.name}   </h4>
         <h4>Time departure: #{searchController.departureDate}   </h4>
@@ -30,13 +30,12 @@
 
         <h4>First Name: #{searchController.user.firstName}   </h4>
         <h4>Second Name: #{searchController.user.secondName}   </h4>
-        <h4>Date of Birth: #{searchController.user.dateOfBirth}   </h4>
-
+        <h4>Date of Birth: #{searchController.dateOfBirth}   </h4>
 
         <p:separator />
 
         <h3> Price: </h3>
-        <h4>Price of your order: #{searchController.price} </h4>
+        <h4>Price of your order: #{searchController.price} togriks </h4>
             <p:commandButton value="Back" action="#{searchController.back}" ajax="false"/>
             <p:commandButton value="Confirm" action="#{searchController.confirm}" ajax="false"/>
         </h:panelGrid>

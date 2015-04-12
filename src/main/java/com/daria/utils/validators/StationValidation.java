@@ -35,10 +35,10 @@ public class StationValidation implements Validator {
     public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
         stationName = value.toString();
-        log.info("Input train name: " + stationName);
-        if(stationEJB.isExist(stationName)){
+        log.info("Input station name: " + stationName);
+        if(stationEJB.isExist(stationName) || stationName.trim().length()==0){
             log.info("Validation failed!");
-            FacesMessage msg = new FacesMessage("Such train already exist", "Please choose another train name.");
+            FacesMessage msg = new FacesMessage("Such station already exist", "Please choose another station name.");
             msg.setSeverity(FacesMessage.SEVERITY_ERROR);
             throw new ValidatorException(msg);
 
