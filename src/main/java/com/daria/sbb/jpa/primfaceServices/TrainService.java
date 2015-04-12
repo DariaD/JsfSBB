@@ -25,7 +25,7 @@ public class TrainService {
 
     @PostConstruct
     public void init() {
-        trains = stEJB.getAll();
+
     }
 
     public List<Train> getStations() {
@@ -33,6 +33,7 @@ public class TrainService {
     }
 
     public Train getTrainByID(int i) {
+        trains = stEJB.getAll();
         for (Train train : trains) {
             if(train.getId() == i){
                 return train;

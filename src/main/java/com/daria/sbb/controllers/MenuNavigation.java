@@ -5,6 +5,8 @@ import org.apache.log4j.Logger;
 import org.jboss.arquillian.core.api.annotation.Inject;
 
 import javax.faces.bean.ManagedBean;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**

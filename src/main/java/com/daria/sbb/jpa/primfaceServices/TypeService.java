@@ -24,15 +24,14 @@ public class TypeService {
     TrainTypeEJB ttEJB = new TrainTypeEJB();
 
     @PostConstruct
-    public void init() {
-        types = ttEJB.getAll();
-    }
+    public void init() { }
 
     public List<TrainType> getTypes() {
         return types;
     }
 
     public TrainType getTrainTypeByID(int i) {
+        types = ttEJB.getAll();
         for (TrainType type : types) {
             if(type.getIdTrainType() == i){
                 return type;

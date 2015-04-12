@@ -13,15 +13,15 @@
     <ui:include src="#{menuNavigation.selectedMenu}" />
 </h:head>
 <h:body>
-    <h2>Welcome to GoodWay! You will have a nice trip! :) </h2>
+    <h2>Welcome to GoodWay Company! You will have a nice trip! :) </h2>
+    <h3>We do all the best for your confortable trip!</h3>
+        <h:panelGrid columns="2" cellpadding="5">
 
-    <h3> This page is about GoodWay Company</h3>
+        <h:graphicImage value="/images/train4.jpg" />
 
-    <h:panelGrid columns="2" cellpadding="5">
-
-        <p:galleria value="#{imagesView.images}" var="image" panelWidth="500" panelHeight="313" showCaption="true">
-            <p:graphicImage name="#{image}" alt="Image Description for #{image}" title="#{image}"/>
-        </p:galleria>
     </h:panelGrid>
+    <h5>This system create by Daria Dzendzik</h5>
+    <h5>March - April, 2015</h5>
+    <h5>For any questions please contact the author: daria.dzendzik@gmail.com</h5>
 </h:body>
 </html>

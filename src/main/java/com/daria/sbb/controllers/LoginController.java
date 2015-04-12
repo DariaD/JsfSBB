@@ -17,7 +17,7 @@ import java.io.Serializable;
 
 @ManagedBean
 @SessionScoped
-public class BasicView implements Serializable {
+public class LoginController implements Serializable {
 
     private String text;
     private String password;

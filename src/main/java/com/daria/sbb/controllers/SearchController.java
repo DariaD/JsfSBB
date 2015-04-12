@@ -56,7 +56,7 @@ public class SearchController  implements Serializable {
     private User user;
 
     private int availablePlaces;
-
+    private String dateOfBirth;
     private String message;
 
 
@@ -126,7 +126,7 @@ public class SearchController  implements Serializable {
     public String byTicket() throws IOException {
         HttpSession session = sessionUtil.getSession();
         setUser((User) session.getAttribute("user"));
-
+        setDateOfBirth(dt.getDateAsString(user.getDateOfBirth()));
         log.info("Selected Train: " + selectedTrain);
 //        if(selectedTrain == null) {
 //            FacesMessage msg = new FacesMessage("Train is not selected", "Please select the train");
@@ -357,4 +357,11 @@ public class SearchController  implements Serializable {
     }
 
 
+    public String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
 }

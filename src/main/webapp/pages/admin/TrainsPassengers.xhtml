@@ -13,7 +13,7 @@
     <ui:include src="/pages/admin/adminMenu.xhtml" />
 </h:head>
 <h:body>
-    <h2> All Exist Trains: and Passengers:</h2>
+    <h2> All Exist Trains: </h2>
 
 
     <h:form>
@@ -23,23 +23,36 @@
 
            <p:column>
                 <f:facet name="header">
-                    <h:outputText value="Id" />
+                    <h:outputText value="Train Name" />
                 </f:facet>
-                <h:outputText value="#{record}" />
-            </p:column>
+                <h:outputText value="#{record.name}" />
+           </p:column>
 
             <p:column>
                 <f:facet name="header">
-                    <h:outputText value="Station  -  Station"/>
+                    <h:outputText value="Train Type"/>
                 </f:facet>
-                <h:outputText value="#{record}" />
+                <h:outputText value="#{record.type}" />
             </p:column>
 
+             <p:column>
+                 <f:facet name="header">
+                     <h:outputText value="From"/>
+                 </f:facet>
+                 <h:outputText value="#{record.from}" />
+             </p:column>
+
+             <p:column>
+                 <f:facet name="header">
+                     <h:outputText value="To"/>
+                 </f:facet>
+                 <h:outputText value="#{record.to}" />
+             </p:column>
             <p:column>
                 <f:facet name="header">
-                    <h:outputText value="Distance"/>
+                    <h:outputText value="Date of departure"/>
                 </f:facet>
-                <h:outputText value="#{record}" />
+                <h:outputText value="#{record.date}" />
             </p:column>
 
         </p:dataTable>
@@ -57,21 +70,21 @@
                 <f:facet name="header">
                     <h:outputText value="Train" />
                 </f:facet>
-                <h:outputText value="#{record}" />
+                <h:outputText value="#{record.train}" />
             </p:column>
 
             <p:column>
                 <f:facet name="header">
-                    <h:outputText value="Date and Time"/>
+                    <h:outputText value="User"/>
                 </f:facet>
-                <h:outputText value="#{record}" />
+                <h:outputText value="#{record.userName}" />
             </p:column>
 
             <p:column>
                 <f:facet name="header">
-                    <h:outputText value="Distance"/>
+                    <h:outputText value="User"/>
                 </f:facet>
-                <h:outputText value="#{record}" />
+                <h:outputText value="#{record.dateOfBirth}" />
             </p:column>
 
         </p:dataTable>

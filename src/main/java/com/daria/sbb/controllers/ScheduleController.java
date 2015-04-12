@@ -39,6 +39,8 @@ public class ScheduleController  implements Serializable {
     StopStationEJB stopStationEJB = new StopStationEJB();
 
     public String searchTrains(){
+        departure.clear();
+        arrive.clear();
         arriveList.clear();
         departureList.clear();
         List<StopStation> stopList = stopStationEJB.getByStation(selectedStation);

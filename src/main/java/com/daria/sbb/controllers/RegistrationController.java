@@ -28,12 +28,12 @@ public class RegistrationController {
 
     public String addUser(){
         User user = new User();
-        if(userEJB.isExist(login)){
-            addErrorMessage("Such user already exist. Please enter another name.");
-            return "pages/error/loginError.xhtml";
-
-        }
-        if(login != null &&  password != null && firstName != null && secondName != null && date != null) {
+//        if(userEJB.isExist(login)){
+//            addErrorMessage("Such user already exist. Please enter another name.");
+//            return "pages/error/loginError.xhtml";
+//
+//        }
+//        if(login != null &&  password != null && firstName != null && secondName != null && date != null) {
             user.setLogin(login);
             user.setPassword(password);
             user.setFirstName(firstName);
@@ -41,10 +41,10 @@ public class RegistrationController {
             user.setDateOfBirth(date);
             userEJB.addNew(user);
             return "successRegistrationPage.xhtml";
-        } else {
-            addErrorMessage("Such user already exist. Please enter another login.");
-            return "error/loginError.xhtml";
-        }
+//        } else {
+//            addErrorMessage("Such user already exist. Please enter another login.");
+//            return "error/loginError.xhtml";
+//        }
     }
 
     public String loginRedirect(){

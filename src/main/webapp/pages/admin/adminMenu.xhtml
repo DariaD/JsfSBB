@@ -7,11 +7,10 @@
         >
 
 <h:form>
-    <p:growl id="messages"/>
-
+    <h:graphicImage value="/images/bridge1.jpg" />
     <p:menubar>
         <p:menuitem value="Schedule" url="/pages/common/schedule.xhtml"/>
-        <p:submenu label="Manage" icon="ui-icon-gear">
+        <p:submenu label="Manage">
             <p:menuitem value="Stations" url="/pages/admin/manage/Stations.xhtml" />
             <p:menuitem value="Routes" url="/pages/admin/manage/Routes.xhtml" />
             <p:menuitem value="Trains" url="/pages/admin/manage/Trains.xhtml" />
@@ -20,7 +19,7 @@
         </p:submenu>
         <p:menuitem value="Trains and Passengers" url="/pages/admin/TrainsPassengers.xhtml"/>
         <p:menuitem value="About Company" url="/pages/common/aboutCompany.xhtml"/>
-        <p:menuitem value="Log out" action="#{menuNavigation.logout}"  />
+        <p:menuitem value="Log out" action="#{menuNavigation.logout}" url="/index.xhtml" />
     </p:menubar>
 </h:form>
 

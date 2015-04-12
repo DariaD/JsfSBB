@@ -24,15 +24,14 @@ public class TrainDepartureService {
     DepartureEJB stEJB = new DepartureEJB();
 
     @PostConstruct
-    public void init() {
-        trains = stEJB.getAll();
-    }
+    public void init() { }
 
     public List<TrainDeparture> getStations() {
         return trains;
     }
 
     public TrainDeparture getTrainDepartureByID(int i) {
+        trains = stEJB.getAll();
         for (TrainDeparture train : trains) {
             if(train.getIdTrainDeparture() == i){
                 return train;

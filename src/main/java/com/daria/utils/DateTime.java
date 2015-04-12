@@ -214,7 +214,49 @@ public class DateTime {
 
     public String getTimeAsString(Date date) {
         ParseDateTime parse = new ParseDateTime(date);
-        return String.format("%s:%s", parse.hour, parse.min);
+        String hour = String.format("%s", parse.hour);
+        String min = String.format("%s", parse.min);
+        if( parse.hour < 10) {
+            hour = "0" + hour;
+        }
+        if (parse.min < 10){
+            min= "0" + min;
+        }
+        return String.format("%s:%s", hour, min);
+    }
+
+    public String getDateTimeAsString(Date date) {
+        ParseDateTime parse = new ParseDateTime(date);
+        String month = String.format("%s", parse.month);
+        String day = String.format("%s", parse.day);
+        String hour = String.format("%s", parse.hour);
+        String min = String.format("%s", parse.min);
+        if( parse.month < 10) {
+            month = "0" + month;
+        }
+        if (parse.day < 10){
+            day= "0" + day;
+        }
+        if( parse.hour < 10) {
+            hour = "0" + hour;
+        }
+        if (parse.min < 10){
+            min= "0" + min;
+        }
+        return String.format("%s-%s-%s %s:%s", parse.year, month, day, hour, min);
+    }
+
+    public String getDateAsString(Date date) {
+        ParseDateTime parse = new ParseDateTime(date);
+        String month = String.format("%s", parse.month);
+        String day = String.format("%s", parse.day);
+        if( parse.month < 10) {
+            month = "0" + month;
+        }
+        if (parse.day < 10){
+            day= "0" + day;
+        }
+        return String.format("%s-%s-%s", parse.year, month, day);
     }
 
     public Date getDateOnly(Date date) {
